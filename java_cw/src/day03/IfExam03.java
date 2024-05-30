@@ -17,10 +17,11 @@ public class IfExam03 {
 		
 			System.out.print("산술연산자와 두 정수를 입력하세요. : ");
 			num1 = scan.nextInt();
-			char math = scan.next().charAt(0);
-			num2 = scan.nextInt();
+			char operator = scan.next().charAt(0);
+			num2 = scan.nextInt(); // 순서대로 하는게 좋음.
 			
-		
+			
+			
 		/*	연산자가 + 이면 두 정수의 합을 출력하고
 		 * 	아니면 연산자가 - 이면 두 정수의 차를 출력하고
 		 *  아니면 연산자가 * 이면 두 정수의 곱을 출력하고
@@ -28,23 +29,29 @@ public class IfExam03 {
 		 *  아니면 연산자가 % 이면 두 정수의 나머지 결과를 출력하고
 		 *  아니면 잘못된 연산자입니다라고 출력하는 코드
 		 * */
-			if(math == '+') {
-				System.out.println("" + num1 + " " + math + " " + num2 + " = " + (num1 + num2));
+			double result;
+			if(operator == '+') {
+				result = num1 + num2;
+				System.out.println("" + num1 + " " + operator + " " + num2 + " = " + ((int)result));
 			}
-			else if(math == '-') {
-				System.out.println("" + num1 + " " + math + " " + num2 + " = " + (num1 - num2));
+			else if(operator == '-') {
+				result = num1 - num2;
+				System.out.println("" + num1 + " " + operator + " " + num2 + " = " + ((int)result));
 			}
-			else if(math == '*') {
-				System.out.println("" + num1 + " " + math + " " + num2 + " = " + (num1 * num2));
+			else if(operator == '*') {
+				result = num1 * num2;
+				System.out.println("" + num1 + " " + operator + " " + num2 + " = " + ((int)result));
 			}
-			else if(math == '/') {
-				System.out.println("" + num1 + " " + math + " " + num2 + " = " + (num1 / num2));
+			else if(operator == '/') {
+				result = (double)num1 / num2;
+				System.out.println("" + num1 + " " + operator + " " + num2 + " = " + (result));
 			}
-			else if(math == '%') {
-				System.out.println("" + num1 + " " + math + " " + num2 + " = " + (num1 % num2));
+			else if(operator == '%') {
+				result = num1 % num2;
+				System.out.println("" + num1 + " " + operator + " " + num2 + " = " + ((int)result));
 			}
 			else {
-				System.out.println("잘못된 연산자입니다.");
+				System.out.println("는 산술 연산자가 아닙니다.");
 			}
 	}
 
