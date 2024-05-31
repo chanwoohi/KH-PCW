@@ -1,6 +1,6 @@
 package day03;
 
-public class IfEx04 {
+public class IfEx03 {
 		// else if 예제
 	public static void main(String[] args) {
 		int num = 4;
