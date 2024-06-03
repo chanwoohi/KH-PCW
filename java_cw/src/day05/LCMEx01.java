@@ -31,7 +31,7 @@ public class LCMEx01 {
 		//num1이 111이고 num2가 30000이면 num1을 30000으로, num2를 111로 수정하는 코드
 		int tmp;
 		if(num1 < num2) {
-			tmp = num1;
+			tmp  = num1;
 			num1 = num2;
 			num2 = tmp;
 		}
