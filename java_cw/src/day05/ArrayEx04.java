@@ -24,7 +24,7 @@ public class ArrayEx04 {
 		}
 		System.out.println();
 		//역순으로 출력
-		for(int i=array.length -1 ; i >= 0; i--) {
+		for(int i = array.length -1 ; i >= 0; i--) {
 			System.out.print(array[i] + " ");
 		}
 	}
