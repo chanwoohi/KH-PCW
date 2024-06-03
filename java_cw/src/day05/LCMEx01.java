@@ -44,9 +44,7 @@ public class LCMEx01 {
 			if(i % num2 ==0) {
 				System.out.println(num1 + "과 " + num2 + "의 최소 공배수 : " + i);
 				break;
-				
 			}
-			
 		}
 	}
 
