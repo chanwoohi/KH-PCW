@@ -21,7 +21,7 @@ public class UpDownGame {
 		Scanner scan = new Scanner(System.in);
 		
 		int i;
-		for(i = 1 ; i <= 100 ; i++) {
+		for(i = 1 ; i <= max + 1 ; i++) {
 			System.out.print("정답을 입력하세요 : ");
 			i = scan.nextInt();
 			if(i > random) {
