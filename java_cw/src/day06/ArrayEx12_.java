@@ -86,7 +86,7 @@ public class ArrayEx12_ {
 					//	=recordCount 번지에 저장하고 recordCount를 1증가
 					record[recordCount++] = count;
 				}//	아니면 내 기록이 5등보다 좋은지 비교해서 좋으면 
-				else if (count > record[recordCount]){
+				else if (count > record[record.length - 1]){
 					//	기록을 등록
 					//	=마지막 번지에 내 기록을 등록
 					record[4] = count;
