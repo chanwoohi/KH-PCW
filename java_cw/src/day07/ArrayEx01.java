@@ -23,7 +23,7 @@ public class ArrayEx01 {
 			eng[i] = scan.nextInt();
 			math[i] = scan.nextInt();
 		}
-		
+
 		// 학생1의 평균 : 
 		// 학생2의 평균 :
 		// 학생3의 평균 : 
@@ -42,15 +42,15 @@ public class ArrayEx01 {
 		}
 		System.out.println("국어 평균 : " + sum / (double)studentCount );
 		sum = 0;
-		for( int i = 0 ; i < studentCount ; i++ ) {
-			sum += eng[i];
+		for( int tmp : eng ) {
+			sum += tmp;
 		}
 		System.out.println("영어 평균 : " + sum / (double)studentCount );
 		sum = 0;
-		for( int i = 0 ; i < studentCount ; i++ ) {
-			sum += math[i];
+		for( int tmp : math ) {
+			sum += tmp;
 		}
 		System.out.println("수학 평균 : " + sum / (double)studentCount );
-		
+
 	}
 }
