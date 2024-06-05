@@ -17,22 +17,40 @@ public class ArrayEx01 {
 		kor = new int[studentCount];
 		eng = new int[studentCount];
 		math = new int[studentCount];
-		for( int i = 0 ; i < 3 ; i++ ) {
+		for( int i = 0 ; i < studentCount ; i++ ) {
 			System.out.print("학생" + (i + 1) + "의 성적을 입력하세요(국어, 영어, 수학 순) : ");
 			kor[i] = scan.nextInt();
 			eng[i] = scan.nextInt();
 			math[i] = scan.nextInt();
 		}
-	
+		
+		// 학생1의 평균 : 
+		// 학생2의 평균 :
+		// 학생3의 평균 : 
 		for( int i = 0 ; i < studentCount ; i++ ) {
-			double avg = (kor[i] + eng[i] + math[i]) / (double)studentCount;
+			double avg = (kor[i] + eng[i] + math[i]) / (double)3.0;
 			System.out.println("학생" + (i + 1) + "의 평균 : " + avg );
 		}
-		// 학생1의 평균 : 90
-		// 학생2의 평균 : 100
-		// 학생3의 평균 : 80.3333
+		/* 각 과목의 평균을 구하는 코드를 작성하세요.
+		 * 국어 평균 :
+		 * 영어 평균 :
+		 * 수학 평균 :
+		 * */
+		int sum = 0;
+		for( int tmp : kor ) {
+			sum += tmp;
+		}
+		System.out.println("국어 평균 : " + sum / (double)studentCount );
+		sum = 0;
+		for( int i = 0 ; i < studentCount ; i++ ) {
+			sum += eng[i];
+		}
+		System.out.println("영어 평균 : " + sum / (double)studentCount );
+		sum = 0;
+		for( int i = 0 ; i < studentCount ; i++ ) {
+			sum += math[i];
+		}
+		System.out.println("수학 평균 : " + sum / (double)studentCount );
 		
-	
 	}
-
 }
