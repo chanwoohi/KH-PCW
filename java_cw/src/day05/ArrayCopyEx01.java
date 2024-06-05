@@ -25,10 +25,9 @@ public class ArrayCopyEx01 {
 		// length : 복사할 개수
 		System.arraycopy(arr1, 0, arr3, 1, arr1.length -1 );
 		
-		
 		for(int i = 0; i < arr1.length; i++ ) {
 			System.out.print(arr3[i] + " ");
 		}
-
+		
 	}
 }
