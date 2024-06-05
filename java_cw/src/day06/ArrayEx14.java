@@ -8,30 +8,36 @@ public class ArrayEx14 {
 	public static void main(String[] args) {
 		String [] list = {"dog", "cat", "java", "cup", "computer"};
 		//문자열을 입력받아 입력받은 문자열이 있는지 없는지 알려주는 코드를 작성하세요.
+		/* 찾을 문자열 입력 : cat
+		 * cat가 있습니다.
+		 * 
+		 * 찾을 문자열 입력 : abc
+		 * abc가 없습니다.
+		 * */
 		
+		// 찾을 문자열 입력 : 문구를 콘솔에 출력
 		Scanner scan = new Scanner(System.in);
-		System.out.print("문자열을 입력하세요. : ");
+		System.out.print("찾을 문자열 입력 : ");
 		String voca = scan.next();
 
-		
-		boolean result = false;
-		for( int i = 0 ; i < list.length ; i++ ) {
-			if( voca.equals(list[i]) ) {
+		// 입력받은 단어가 있는지 없는지 찾아서 결과를 콘솔에 출력
+		// 1. list에서 입력받은 단어가 있는지 없는지 하나씩 탐색해서 찾음
+		// 1-1. 단어가 있는지 없는지 확인하기 위한 변수를 선언
+		boolean result = false; // 1-2. 에서 '있다'로 바꿔야 하니까 false
+		// 1-2. list에서 하나씩 꺼내서 입력받은 단어와 같은지 비교하여 같으면 변수를 있다로 만들고 빠져나옴
+		for( String tmp : list ) {
+			if( voca.equals(tmp) ) {
 				result = true;
 				break;
 			}
 		}
+		// 2. 있으면 있습니다. 아니면 없습니다. 라고 출력
 		if(result) {
-			System.out.println("문자열이 있습니다.");
+			System.out.println(voca + "가 있습니다.");
 		}
 		else {
-			System.out.println("문자열이 없습니다.");
+			System.out.println(voca + "가 없습니다.");
 		}
-		
-		
-		
-		
-		
 	}
 
 }
