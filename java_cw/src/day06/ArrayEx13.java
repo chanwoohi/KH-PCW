@@ -19,9 +19,5 @@ public class ArrayEx13 {
 		for(String tmp : text){
 			System.out.println(tmp);
 		}
-		
-		
-		
 	}
-
 }
