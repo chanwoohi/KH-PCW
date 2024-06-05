@@ -24,7 +24,28 @@ public class BaseballGame {
 		 * 정답입니다.
 		 * */
 		// 중복되지 않은 3개의 숫자 생성해서 배열에 넣기
-		
+		int count = 0;
+		int list [] = new int[3];
+		int min = 1, max = 9;
+		int i;
+		while(count < 3) {
+			//랜덤한 수 생성
+			int random = (int)(Math.random() * (max - min + 1) + min );
+			for( i = 0 ; i < count ; i++) {
+				for( list[i] == random) {
+					
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		}
 		// 배열에 있는 숫자와 입력된 숫자 비교
 		
 
