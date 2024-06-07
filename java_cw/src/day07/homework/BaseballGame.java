@@ -1,5 +1,8 @@
 package day07.homework;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class BaseballGame {
 
 	public static void main(String[] args) {
@@ -23,32 +26,67 @@ public class BaseballGame {
 		 * 3S
 		 * 정답입니다.
 		 * */
-		// 중복되지 않은 3개의 숫자 생성해서 배열에 넣기
+		// 중복되지 않은 3개의 랜덤한 숫자 생성해서 배열에 넣기
 		int count = 0;
 		int list [] = new int[3];
 		int min = 1, max = 9;
-		int i;
+		int random;
+		int i, s = 0 , b = 0 ;;
+		Scanner scan = new Scanner(System.in);
 		while(count < 3) {
-			//랜덤한 수 생성
-			int random = (int)(Math.random() * (max - min + 1) + min );
+		//랜덤한 수 생성
+			random = (int)(Math.random() * (max - min + 1) + min );
 			for( i = 0 ; i < count ; i++) {
-				for( list[i] == random) {
-					
+				if( list[i] == random) {
+					break;
+				}
+			}
+			if(i == count) {
+				list[count] = random;
+				count++;
+			}
+		}
+		System.out.println(Arrays.toString(list));
+		int [] user = new int [3];
+		// 반복문을 이용하여 정수 3개를 입력 받은 후 판별 (다 맞출 때 까지)
+		do {
+			s = 0 ;  b = 0 ;
+			// 입력 안내문구 출력
+			System.out.print("입력 : ");
+			// 3개를 입력
+			for( i = 0 ; i < user.length ; i ++) {
+				user[i] = scan.nextInt();
+			}
+			// 결과 판별 후 출력
+			// 스트라이크 또는 볼로 판별
+			// 위치가 같으면 스트라이크의 개수를 다르면 볼의 개수를 증가
+			
+			for( i = 0 ; i < list.length ; i++) {
+				for( int j = 0 ; j < user.length ; j++ ) {
+					if (list[i] == user[j]) {
+						if( i == j ) {
+							s++;
+						}
+						else {
+							b++;
+						}
+					}
 				}
 			}
 			
-			
-			
-			
-			
-			
-			
-			
-			
-		}
-		// 배열에 있는 숫자와 입력된 숫자 비교
-		
-
+			// 스트라이크와 볼의 개수를 이용하여 결과를 출력
+			if( s != 0 ) {
+				System.out.print(s + "S");
+			}
+			if( b != 0 ) {
+				System.out.print(b + "B");
+			}
+			if( s == 0 && b == 0) {
+				System.out.print("O");
+			}
+			System.out.println();
+		} while ( s != 3 );
+		System.out.println(" 정답입니다. ");
 	}
 
 }
