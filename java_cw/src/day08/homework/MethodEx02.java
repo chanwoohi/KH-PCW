@@ -9,7 +9,7 @@ public class MethodEx02 {
 	/**
 	 * 기능    : 입력한 정수 n 크기만큼의 배열에 1~9 사이의 랜덤한 수를 생성하여 저장하는 메서드
 	 * 매개변수 : 크기 정수 n => int n 
-	 * 리턴타입 : n 크기만큼의 배열  => int[]
+	 * 리턴타입 : n 크기만큼의 배열  => int []
 	 * 메서드명 : random
 	 * */
 	public static int[] random(int n) {
@@ -22,9 +22,31 @@ public class MethodEx02 {
 		return answer;
 	}
 	
+	public static int random( int min , int max ) {
+		if(min > max) {
+			int tmp = min;
+			min = max;
+			max = tmp;
+		}
+		int random = (int)(Math.random() * ( max - min + 1 ) + min );
+		return random;
+	}
+	
+	public static int[] createRandomArray( int size , int min, int max) {
+		if( size < 0 ) {
+			return null;
+		}
+		int [] arr = new int [size];
+		for( int i = 0 ; i < size ; i++ ) {
+			arr[i] = random(min, max);
+		}
+		return arr;
+	}
+	
 	public static void main(String[] args) {
-		int num = 10;
-		System.out.println(Arrays.toString(random(num)));
+		int size = 5;
+		int []arr = createRandomArray(size, 1, 9);
+		System.out.println(Arrays.toString(arr));
 
 	}
 
