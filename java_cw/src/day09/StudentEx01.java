@@ -113,7 +113,7 @@ public class StudentEx01 {
 			}
 			//반이 다르면
 			if(std.getClassNum() != list[i].getClassNum()) {
-				continue;
+				
 			}
 			//번호가 다르면
 			if( std.getNum() != list[i].getNum()) {
