@@ -65,7 +65,6 @@ public class VocabularyEx01 {
 	 * @return index 번지에 word가 있으면 true, 없으면 false
 	 * */
 
-
 	public static boolean checkWord(Word[] list, String word, int index) {
 		if(list.length <= index || index < 0) {
 			return false;
@@ -75,8 +74,6 @@ public class VocabularyEx01 {
 		}
 		return list[index].getWord().equals(word);
 	}
-
-
 
 	/* 메뉴를 출력하는 메소드
 	 * */
@@ -108,10 +105,6 @@ public class VocabularyEx01 {
 	 * @return 등록된 단어 숫자
 	 * */
 	public static int insertWord (Word [] list, Scanner scan, int wordCount) {
-		if(wordCount == list.length) {
-			System.out.println("다 찼습니다.");
-			return wordCount;
-		}
 		System.out.println("단어 등록입니다.");
 		//단어 리스트에 단어 객체를 저장
 		//= 마지막으로 저장된 위치 다음에 단어 객체를 저장
