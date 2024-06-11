@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 
 public class VocabularyEx01 {
-	
+
 	private static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -17,12 +17,10 @@ public class VocabularyEx01 {
 		 * 메뉴 선택 :
 		 * */
 		//필요한 변수들
-		
 		int menu;
 		final int WORD_MAX = 2;
 		int wordCount = 0; //저장된 단어 갯수
 		Word [] list = new Word[WORD_MAX]; // 단어 리스트
-		Word tmp;
 		// 반복 : 종료를 선택하지 않을 때 까지
 		do {
 			//메뉴 출력
@@ -37,21 +35,13 @@ public class VocabularyEx01 {
 				if(wordCount == list.length) {
 					list = expandWordList(list, list.length + 10);
 				}
-				insertWord(list, wordCount);
 				for(int i = 0 ; i<wordCount; i++) {
 					list[i].print();
 				}
-				
+
 				break;
 			case 2 :
-				//단어 수정을 구현하기 위한 과정을 주석으로 작성. 같은 단어가 있는 경우
-				//누구를 수정할지를 선택하는 부분을 고민해야함
-				//같은 단어가 있는 경우를 찾아서, 해당 번지를 출력 !! i i+1 로 하면됨 정렬해놧음 !!
-				indexOf(list, wordCount, std);
-				
-				// i + 1 번지에 새로운 단어 등록?
-				
-				// 알파벳순 배열 한 번 더
+				updateWord(list, wordCount);
 				break;
 			case 3 :
 				System.out.println("단어 검색 입니다.");
@@ -67,6 +57,23 @@ public class VocabularyEx01 {
 				break;
 			}
 		} while(menu != 5);
+	}
+	/**기능 : list에 index 번지에 있는 단어가 word인지 아닌지 알려주는 메소드
+	 * @param list 단어 리스트
+	 * @param word 검색할 단어
+	 * @param index 해당 단어의 번지
+	 * @return index 번지에 word가 있으면 true, 없으면 false
+	 * */
+
+
+	public static boolean checkWord(Word[] list, String word, int index) {
+		if(list.length <= index || index < 0) {
+			return false;
+		}
+		if(list[index] == null ) {
+			return false;
+		}
+		return list[index].getWord().equals(word);
 	}
 
 
@@ -113,18 +120,6 @@ public class VocabularyEx01 {
 		return wordCount + 1;	
 	}
 
-
-	public static int indexOf(Word[]list, int count, Word std) {
-		if( list == null || std == null ) {
-			return -1;
-		}
-		for( int i = 0 ; i < count ; i++ ) {
-			if(std.getWord() != list[i].getWord()) {
-				return i;
-			}
-		}
-		return  -1;
-	}
 	/**기능 : 저장된 단어 리스트를 정렬하는 메소드 
 	 * @param list 단어 리스트
 	 * @param wordCount 저장된 단어 개수
@@ -176,6 +171,45 @@ public class VocabularyEx01 {
 		System.arraycopy(list, 0, tmp, 0, list.length);
 		return tmp;
 	}
+	public static void updateWord(Word[] list, int wordCount) {
+		// 단어 수정을 구현하기 위한 과정을 주석으로 작성. 같은 단어가 있는 경우
+		// 누구를 수정할지를 선택하는 부분을 고민해야함
+		// 수정할 단어를 입력
+		System.out.print("수정할 단어 입력 : ");
+		String word = scan.next();
+		int count = 0; // 일치하는 단어가 몇 개 있는지 확인하는 변수
+		for(int i = 0 ; i < wordCount ; i++) {
+			// 단어 리스트에 수정할 단어와 일치하는 단어들을 번호와 함께 출력
+			if( list[i].getWord().equals(word)){
+				System.out.println("번호 : " + (i + 1) );
+				list[i].print();
+				count++;
+			}
+		}
+		// 수정할 단어가 없으면 안내문구 출력 후 종료
+		if(count == 0) {
+		System.out.println("수정할 단어가 없습니다.");
+		return;
+		}
+		// 수정할 단어를 선택
+		System.out.print("수정할 단어 번호 입력 : ");
+		int num = scan.nextInt();
+		boolean res = checkWord(list, word, num-1);
+		if(!res) {
+			System.out.println("잘못된 번호를 선택했습니다.");
+			return;
+		}
+		// 수정할 단어, 품사, 의미를 입력
+		Word tmp = inputWord(scan);
+		// 입력한 정보로 선택한 단어를 수정
+		list[num-1].updateWord(tmp);
+		list[num-1].print();
+		// 정렬
+		wordSort(wordCount,list);
+		System.out.println("--------------------");
+		System.out.println("단어 수정을 완료했습니다.");
+		System.out.println("--------------------");
+	}
 }
 /**영어 단어를 관리하기 위한 Word 클래스를 만들고,
  * 필요한 멤버변수들을 선언 해 보세요.
@@ -201,7 +235,11 @@ class Word {
 		System.out.println("의미 : " + meaning );
 		System.out.println("--------------------");
 	}
-
+	public void updateWord(Word word) {
+		this.word = word.word;
+		this.wordClass = word.wordClass;
+		this.meaning = word.meaning;
+	}
 	//getter와 setter
 	public String getWord() {
 		return word;
