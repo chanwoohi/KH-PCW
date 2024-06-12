@@ -38,16 +38,16 @@ public class VocabularyEx01 {
 				for(int i = 0 ; i<wordCount; i++) {
 					list[i].print();
 				}
-
 				break;
 			case 2 :
 				updateWord(list, wordCount);
 				break;
 			case 3 :
-				System.out.println("단어 검색 입니다.");
+				searchWord(list, wordCount);
 				break;
 			case 4 :
-				System.out.println("단어 삭제 입니다.");
+				wordCount = deleteWord(list, wordCount);
+				
 				break;
 			case 5 :
 				System.out.println("프로그램을 종료합니다.");
@@ -58,13 +58,40 @@ public class VocabularyEx01 {
 			}
 		} while(menu != 5);
 	}
+	public static int deleteWord(Word[] list, int wordCount) {
+		// 단어를 삭제하는 기능
+		// 삭제하고 싶은 단어 입력
+		System.out.print("단어 : ");
+		String word = scan.next();
+		//삭제할 단어를 출력
+		printSearchWord(list, wordCount, word);
+		//삭제할 단어를 선택
+		System.out.print("번호 입력 : ");
+		int num = scan.nextInt();
+		//잘못된 선택이면 안내 문구 출력
+		if(!checkWord(list, word, num - 1)) {
+			System.out.println("잘못된 번호를 선택했습니다.");
+			return wordCount;
+		}
+		wordCount = deleteWordList(list, wordCount, num-1);
+		System.out.println("삭제가 완료 됐습니다.");
+		return wordCount;
+	}
+	/**기능 : 단어를 입력받아 단어 리스트에 해당 단어가 있는지 출력하는 메소드
+	 * @param list 단어 리스트
+	 * @param wordCount 저장된 단어 개수
+	 * */
+	public static void searchWord(Word[] list, int wordCount) {
+		System.out.print("검색할 단어 입력 : ");
+		String word = scan.next();
+		printSearchWord(list, wordCount, word);
+	}
 	/**기능 : list에 index 번지에 있는 단어가 word인지 아닌지 알려주는 메소드
 	 * @param list 단어 리스트
 	 * @param word 검색할 단어
 	 * @param index 해당 단어의 번지
 	 * @return index 번지에 word가 있으면 true, 없으면 false
 	 * */
-
 	public static boolean checkWord(Word[] list, String word, int index) {
 		if(list.length <= index || index < 0) {
 			return false;
@@ -74,7 +101,6 @@ public class VocabularyEx01 {
 		}
 		return list[index].getWord().equals(word);
 	}
-
 	/* 메뉴를 출력하는 메소드
 	 * */
 	public static void printMenu() {
@@ -112,7 +138,6 @@ public class VocabularyEx01 {
 		//저장된 단어 개수를 1 증가
 		return wordCount + 1;	
 	}
-
 	/**기능 : 저장된 단어 리스트를 정렬하는 메소드 
 	 * @param list 단어 리스트
 	 * @param wordCount 저장된 단어 개수
@@ -170,24 +195,11 @@ public class VocabularyEx01 {
 		// 수정할 단어를 입력
 		System.out.print("수정할 단어 입력 : ");
 		String word = scan.next();
-		int count = 0; // 일치하는 단어가 몇 개 있는지 확인하는 변수
-		for(int i = 0 ; i < wordCount ; i++) {
-			// 단어 리스트에 수정할 단어와 일치하는 단어들을 번호와 함께 출력
-			if( list[i].getWord().equals(word)){
-				System.out.println("번호 : " + (i + 1) );
-				list[i].print();
-				count++;
-			}
-		}
-		// 수정할 단어가 없으면 안내문구 출력 후 종료
-		if(count == 0) {
-		System.out.println("수정할 단어가 없습니다.");
-		return;
-		}
+		printSearchWord(list, wordCount, word);
 		// 수정할 단어를 선택
 		System.out.print("수정할 단어 번호 입력 : ");
 		int num = scan.nextInt();
-		boolean res = checkWord(list, word, num-1);
+		boolean res = checkWord(list, word, num - 1);
 		if(!res) {
 			System.out.println("잘못된 번호를 선택했습니다.");
 			return;
@@ -202,6 +214,46 @@ public class VocabularyEx01 {
 		System.out.println("--------------------");
 		System.out.println("단어 수정을 완료했습니다.");
 		System.out.println("--------------------");
+	}
+	/**기능 : 단어 리스트에 단어가 있으면 해당 단어를 출력하고 없으면 없다고 출력하는 메소드
+	 * @param list 단어 리스트
+	 * @param word 단어
+	 * @param wordCount 저장된 단어 수
+	 * */
+	public static void printSearchWord(Word [] list, int wordCount, String word) {
+		int count = 0; // 일치하는 단어가 몇 개 있는지 확인하는 변수
+		for(int i = 0 ; i < wordCount ; i++) {
+			// 단어 리스트에 수정할 단어와 일치하는 단어들을 번호와 함께 출력
+			if( list[i].getWord().equals(word)){
+				System.out.println("번호 : " + (i + 1) );
+				list[i].print();
+				count++;
+			}
+			if(count == 0) {
+				System.out.println("검색한 단어가 없습니다.");
+				return;
+			}
+		}
+	}
+	/** 기능 : 배열의 index번지에 요소를 삭제하는 메소드
+	 * @param list 단어 리스트
+	 * @param wordCount 단어 수
+	 * @param index 삭제할 위치
+	 * @return 삭제된 후 단어 수
+	 * */
+	public static int deleteWordList(Word[]list, int wordCount, int index) {
+		Word[] tmp = new Word[list.length];
+		//단어 리스트의 복사본
+		System.arraycopy(list, 0, tmp, 0, wordCount);
+		// 올바른 선택이면 삭제
+		// 삭제하려는 번지 다음에 있는 단어들부터 앞으로 한칸씩 당기고 마지막 단어를 null
+		// 저장된 단어수를 1감소
+		if(wordCount - index - 1 != 0) {
+			System.arraycopy(tmp, index + 1, list, index, wordCount - index - 1);
+		}
+		wordCount --;
+		tmp[wordCount] = null;
+		return wordCount;
 	}
 }
 /**영어 단어를 관리하기 위한 Word 클래스를 만들고,
