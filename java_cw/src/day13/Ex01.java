@@ -13,7 +13,11 @@ public class Ex01 {
 		String search = scan.next();
 		int count = 0;
 		for( String tmp : books ) {
-			if(tmp.contains(search)){
+			/*if(tmp.contains(search)){
+				System.out.println(tmp);
+				count++;
+			}*/
+			if(tmp.indexOf(search) >= 0) {
 				System.out.println(tmp);
 				count++;
 			}
