@@ -37,6 +37,7 @@ public class ObjectEx01 {
 		System.out.println("std5 : " + std5);
 		System.out.println("std1 == std5 : " + (std1 == std5));  // std1과 std5는 다른 객체
 		System.out.println("std1.equals(std5) : " + std1.equals(std5));
+		
 	}
 
 	@Override
