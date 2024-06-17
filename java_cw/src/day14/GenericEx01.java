@@ -32,7 +32,7 @@ public class GenericEx01 {
 		list4[0] = 100;
 		list4[1] = 1000;
 		
-		printArray(list3);
+		printArray(list3.);
 		printArray(list4);
 	}
 	
