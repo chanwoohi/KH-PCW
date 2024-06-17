@@ -22,7 +22,6 @@ public class MethodEx02 {
 				return i;
 			}
 		}
-		
 		return i;
 	}
 	
@@ -59,5 +58,4 @@ public class MethodEx02 {
 		System.out.println(num1 + "과 " + num2 + "의 " + "최대공약수는 : " + lcm(num1,num2));
 		System.out.println(num1 + "과 " + num2 + "의 " + "최소공배수는 : " + gcd(num1,num2));
 	}
-
 }
