@@ -7,6 +7,7 @@ import java.util.Iterator;
 public class ListEx02 {
 
 	public static void main(String[] args) {
+		// List 반복문 예제
 		ArrayList<String> list = new ArrayList<String>();
 		
 		list.add("hi");
