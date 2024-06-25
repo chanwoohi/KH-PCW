@@ -1,9 +1,15 @@
 package day19.board;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
+import day18.homework.v1.Schedule;
 import program.Program;
 
 public class BoardManager implements Program{
@@ -66,12 +72,26 @@ public class BoardManager implements Program{
 
 	@Override
 	public void save(String fileName) {
-
+		try(FileOutputStream fos = new FileOutputStream(fileName);
+			ObjectOutputStream oos = new ObjectOutputStream(fos)){
+			oos.write(Board.getCount());
+			oos.writeObject(list);
+		} catch (Exception e) {
+			System.out.println("저장에 실패했습니다.");
+		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void load(String fileName) {
-
+		try(FileInputStream fis = new FileInputStream(fileName);
+			ObjectInputStream ois = new ObjectInputStream(fis)){
+			int count = ois.read();
+			Board.setCount(count);
+			list = (List<Board>)ois.readObject();
+		} catch (Exception e) {
+			System.out.println("불러오기에 실패했습니다.");
+		} 
 	}
 
 	@Override
@@ -80,7 +100,6 @@ public class BoardManager implements Program{
 		switch(menu) {
 		case INSERT:
 			insertBoard();
-			System.out.println(list);
 			break;
 		case UPDATE:
 			updateBoard();
@@ -102,7 +121,7 @@ public class BoardManager implements Program{
 		printBar();
 		System.out.println("프로그램을 종료합니다.");
 		printBar();
-		
+
 	}
 	private void insertBoard() {
 		//게시글 정보를 입력
@@ -143,6 +162,7 @@ public class BoardManager implements Program{
 		if(board == null) {
 			return;
 		}
+		
 		printBar();
 		//같으면 새 제목과 내용을 입력
 		scan.nextLine();
@@ -190,48 +210,112 @@ public class BoardManager implements Program{
 		System.out.print("삭제할 게시글 번호 입력 : ");
 		int num = scan.nextInt();
 		printBar();
+		//게시글 번호에 맞는 게시글을 가져옴
 		Board board = selectBoard(num);
-		if(board == null) {
+		//게시글이 없으면 종료
+		/*if(board == null) {
 			return;
 		}
-		printBar();
 		//리스트에서 게시글을 삭제
 		list.remove(board);
-		System.out.println(board.getNum() + "번 게시글이 삭제되었습니다.");
+		printBar();
+		System.out.println(board.getNum() + "번 게시글이 삭제되었습니다.");*/
+
+		//게시글을 리스트에서 삭제하는데 성공하면 안내 문구 출력
+		if(list.remove(board)) {
+			printBar();
+			System.out.println(board.getNum() + "번 게시글이 삭제되었습니다.");
+		}
 	}
 
 	private void searchBoard() {
 		//검색어 입력
-		System.out.print("검색어 입력 : ");
-		String search = scan.nextLine();
+		System.out.print("검색어(전체는 엔터) : ");
+		scan.nextLine(); // 공백처리
+		String search = scan.nextLine();   // 엔터 입력 받아야 해서 nextLine <<
+		printBar();
 		
 		//게시글에서 검색어가 제목 또는 내용에 들어간 게시글 리스트를 가져옴
-		List<Board> searchList = new ArrayList<Board>();
-		searchList.contains(search);
-		System.out.println(search);
+		List<Board> searchList = getSearchList(search);
+
+
 		//게시글 리스트가 비어 있으면 안내문구 출력 후 종료
+		if( searchList.size() == 0 ) {
+			printBar();
+			System.out.println("검색어와 일치하는 게시글이 없습니다.");
+		}
 		
 		//가져온 게시글 리스트를 출력
+		printList(searchList);
 		
 		//게시글을 확인할건지 선택
+		System.out.print("게시글을 확인 하시겠습니까? (y/n) : ");
+		char check = scan.next().charAt(0);
 		
 		//확인하지 않겠다고 하면 종료
+		if(check != 'y') {
+			return;
+		}
 		
 		//확인하면 게시글 번호를 입력
+		printBar();
+		System.out.print("게시글 번호 입력 : ");
+		int num = scan.nextInt();
 		
 		//입력받은 게시글 번호로 객체를 생성
+		Board board = new Board(num);
 		
 		//검색 리스트에서 생성된 객체와 일치하는 번지를 확인
-		
+		int index = searchList.indexOf(board);
 		//번지가 유효하지 않으면 안내문구 출력 후 종료
+		printBar();
+		if( index < 0 ) {
+			System.out.println("검색 결과에는 없는 게시글입니다.");
+			return;
+		}
 		
 		//번지에 있는 게시글을 가져옴
-		
+		board = searchList.get(index);
 		//가져온 게시글을 출력
-		
+		board.print();
 		//메뉴로 돌아가려면... 문구 출력
-		
+		printBar();
+		System.out.println("메뉴로 돌아가려면 엔터를 치세요.");
 		//엔터를 입력받도록 처리
+		scan.nextLine();//게시글 번호 입력할 때 남은 공백처리
+		scan.nextLine();//입력한 엔터 처리
 		
 	}
+
+
+
+	private void printList(List<Board> searchList) {
+		for(Board board : searchList) {
+			System.out.println(board);
+		}
+	}
+
+
+
+	private List<Board> getSearchList(String search) {
+
+		List<Board> searchList = new ArrayList<Board>();
+		//전체 게시글에서 하나씩 꺼내서 전체 탐색
+		for(Board board : list) {
+			//게시글의 제목 또는 내용에 검색어가 포함되어 잇으면 검색 리스트에 추가
+			String title = board.getTitle();
+			String contents = board.getContents();
+			if( title.contains(search)||
+					contents.contains(search)) {
+				searchList.add(board);
+			}
+		}
+		return searchList;
+		//스트림을 이용하여 검색어와 일치하는 게시글 리스트를 가져옴
+		/*return list.stream().filter(p->p.getTitle().contains(search)
+				|| p.getContents().contains(search))
+				.collect(Collectors.toList());*/
+	}
+
+
 }
