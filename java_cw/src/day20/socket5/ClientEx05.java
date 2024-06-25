@@ -7,7 +7,7 @@ public class ClientEx05 {
 
 	public static void main(String[] args) {
 		int port = 5001;
-		String ip = "192.168.30.199";
+		String ip = "192.168.30.210";
 		
 		try{
 			System.out.print("아이디 입력 : ");
