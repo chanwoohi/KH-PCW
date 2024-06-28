@@ -23,7 +23,7 @@ public class StudentManager implements Program{
 	@Override
 	public void printMenu() {
 		System.out.print(
-				"메뉴\n"
+						"메뉴\n"
 						+ "1. 학생 관리\n"
 						+ "2. 과목 관리\n"
 						+ "3. 종료\n"
