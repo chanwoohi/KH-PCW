@@ -3,10 +3,11 @@ package day13;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 public class DateEx01 {
 	public static void main(String[] args) throws ParseException { // throws ParseException 예외를 미뤄줌
-		
+		Scanner scan = new Scanner(System.in);
 		Date date = new Date();
 		
 		System.out.println(date);
@@ -29,5 +30,14 @@ public class DateEx01 {
 		SimpleDateFormat format3 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date date3 = format3.parse(dateStr3);
 		System.out.println(date3);
+		
+		//이렇게 하는 것임
+		SimpleDateFormat format4 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date4 = format4.parse(scan.next());
+		System.out.println(date4);
+		SimpleDateFormat format5 = new SimpleDateFormat("yyyy-MM-dd");
+		String dateStr4 = format5.format(date4);
+		System.out.println(dateStr4);
+		
 	}
 }
