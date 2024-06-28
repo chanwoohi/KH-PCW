@@ -58,7 +58,7 @@ public class ServerMain {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		//oos를 이용해서 연락처 리스트를 전송
+		// oos를 이용해서 연락처 리스트를 전송
 		try {
 			System.out.println(list);
 			oos.writeObject(list);
