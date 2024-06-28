@@ -63,7 +63,5 @@ public class Student implements Serializable {
 		this.num = std.num;
 		this.name = std.name;
 	}
-	
-
 
 }
