@@ -19,18 +19,19 @@ public class ServerEx02 {
 		
 		// 전송할 데이터
 		Scanner scan = new Scanner(System.in);
-		
+		ServerSocket serverSocket;
 		try {
 			//2. 서버용 소켓 객체 생성
-			ServerSocket serverSocket = new ServerSocket(port);
+			serverSocket = new ServerSocket(port);
 			
 			System.out.println("[대기 중]......");
 			
 			//3. 대기
 			//4. 요청 수락 후 소켓 객체를 생성
 			System.out.println("[연결 성공]......");
-
+			
 			Socket socket = serverSocket.accept();
+			
 			//클라이언트에서 보낸 문자열들을 읽어 옴
 			InputStream is = socket.getInputStream();
 			ObjectInputStream ois = new ObjectInputStream(is);

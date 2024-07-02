@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -12,12 +13,15 @@ import java.util.Scanner;
 public class ClientEx02 {
 
 	public static void main(String[] args) {
-		String ip = "192.168.30.210"; //서버 IP
-		int port = 5001;//서버 포트
 		Scanner scan = new Scanner(System.in);
+		String ip; //서버 IP
+		int port = 5001;//서버 포트
 		//1. 소켓을 생성하고 대기
 			System.out.println("[서버 연결 요청]");
-		try(Socket socket = new Socket(ip, port)){
+		try{
+			ip = InetAddress.getLocalHost().getHostAddress();
+			
+			Socket socket = new Socket(ip, port);
 			System.out.println("서버 연결 완료");
 			//서버로 문자열 전송
 			OutputStream os = socket.getOutputStream();
