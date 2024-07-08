@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>표 스타일 예제</title>
+	<style>
+
+		.table1{
+			width: 100%; border: 1px solid black;
+			border-left: none; border-right: none;
+			border-collapse: collapse;
+			table-layout: fixed;
+			caption-side: bottom;
+			empty-cells: hide;
+		}
+		.table1 th:first-of-type{
+			width: 50px;
+		}
+		
+		.table1 td, .table1 th{
+			border: 1px solid black;
+			border-left: none; border-right: none;
+			height: 50px;
+		}
+		.table1 tbody tr:hover {
+			background-color: yellow;
+		}
+		/* 
+		empty-cells
+			- td/th가 비어있으면 보여줄지 안보여줄지 결정하는 속성
+			- border-collase 속성이 seperate일 때 적용
+		border-spacing
+			- border-collase 속성이 seperate일 때 적용
+			- 테두리 사이의 간격을 설정
+			- 수평, 수직 순으로 설정
+		*/
+	</style>
+</head>
+<body>
+	<table class="table1">
+		<caption>게시글</caption>
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>조회수</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+			</tr>
+			<tr>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+			</tr>
+			<tr>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+			</tr>
+		</tbody>
+</body>
+</html>
