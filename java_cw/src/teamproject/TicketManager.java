@@ -75,7 +75,6 @@ public class TicketManager implements Program{
 					}
 					// 아니면 잘못된 영화 입력
 					else {
-						
 						System.out.println("잘못된 영화 제목 입력");
 					}
 					
@@ -131,17 +130,17 @@ public class TicketManager implements Program{
 			}while( buyMenu != 4 );
 			break;
 		case 2 :
-			System.out.println("영화표 환불");
+			System.out.println("영화표 환불 구현 예정입니다");
 			break;
 		case 3 :
-			// 예약 전체 조회
+			// 예약 전체 조회 // 예약리스트 toString 출력
 			System.out.println(bookList);
 			break;
 		case 4 :
-			System.out.println("프로그램 종료");
+			System.out.println("프로그램 종료합니다");
 			break;
 		default :
-			System.out.println("잘못된 번호 입력");
+			System.out.println("잘못된 번호 입력입니다");
 		}
 	}
 	@Override
