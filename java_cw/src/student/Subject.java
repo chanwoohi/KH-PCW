@@ -54,7 +54,7 @@ public class Subject implements Serializable {
 	@Override
 	public String toString() {
 		return "과목 : " + name + ", " + grade + "학년 " + semester + "학기\n중간 : " + midterm
-				+ "기말 : " + finals + "\n 수행" + performance + "\n총점 : " + getTotal();
+				+ "기말 : " + finals + "\n수행" + performance + "\n총점 : " + getTotal();
 	}
 
 	private double getTotal() {
