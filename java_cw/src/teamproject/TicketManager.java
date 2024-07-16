@@ -63,7 +63,7 @@ public class TicketManager implements Program{
 					// 영화 리스트에 이름 있는지 확인하기 위해 반복문으로 입력받은 movieName 을 포함하는 객체를 찾아서
 					int count = 0;
 					for(int i = 0 ; i < list.size(); i++) {
-						if(list.get(i).getDate().contains(movieName)) {
+						if(list.get(i).getMovieName().contains(movieName)) {
 							// count 증가시키고, 예약 리스트에 해당 리스트 객체 저장
 							count++;
 							bookList.add(list.get(i));
@@ -86,7 +86,7 @@ public class TicketManager implements Program{
 					// 상영관 선택
 					scan.nextLine();
 					System.out.print("상영관 입력 : ");
-					String movieTheater = scan.nextLine();			
+					String movieTheater = scan.next();
 					Movie bookTheater = new Movie("", movieTheater,"");
 					// 영화 리스트에 상영관 있는지 확인 후
 					if(!list.contains(bookTheater)) {
@@ -96,7 +96,7 @@ public class TicketManager implements Program{
 					// 있으면 예약리스트에 추가 후 예약되었습니다 출력
 					else {
 						for(int i = 0 ; i < list.size() ; i++ ) {
-							if(list.get(i).getDate().contains(movieTheater)) {
+							if(list.get(i).getTheater().contains(movieTheater)) {
 								bookList.add(list.get(i));
 							}
 						}
@@ -122,7 +122,7 @@ public class TicketManager implements Program{
 								bookList.add(list.get(i));
 							}
 						}
-					}	
+					}
 					System.out.println(bookList);
 					break;
 				default:
