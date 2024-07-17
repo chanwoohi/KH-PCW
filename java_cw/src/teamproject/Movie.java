@@ -12,6 +12,7 @@ public class Movie {
 		private String theater;
 		private String date;
 		
+		
 		@Override
 		public String toString() {
 			return "제목 : " + movieName + ", 상영관 : " + theater + ", 날짜 : " + date;
@@ -26,13 +27,15 @@ public class Movie {
 			if (getClass() != obj.getClass())
 				return false;
 			Movie other = (Movie) obj;
-			return Objects.equals(theater, other.theater);
+			return Objects.equals(date, other.date) && Objects.equals(movieName, other.movieName)
+					&& Objects.equals(theater, other.theater);
 		}
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(theater);
+			return Objects.hash(date, movieName, theater);
 		}
 
+		
 	
 	}
