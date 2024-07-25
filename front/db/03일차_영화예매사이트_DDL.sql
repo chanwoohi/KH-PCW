@@ -11,7 +11,7 @@ CREATE TABLE `person` (
 	`ps_name`	varchar(30)	NOT NULL,
 	`ps_birth`	date	NOT NULL,
 	`ps_detail`	longtext	NOT NULL,
-	`ps_country`	varchar(30)	NOT NULL
+	`ps_contry`	varchar(30)	NOT NULL
 );
 
 DROP TABLE IF EXISTS `character`;
@@ -97,7 +97,7 @@ CREATE TABLE `schedule` (
 	`sd_num`	int primary key auto_increment	NOT NULL,
 	`sd_time`	time	NOT NULL,
 	`sd_date`	date	NOT NULL,
-	`sd_early`	int	NOT NULL,
+	`sd_earyly`	int	NOT NULL,
 	`sd_mo_num`	int	NOT NULL,
 	`sd_sc_num`	int	NOT NULL
 );
@@ -161,13 +161,12 @@ REFERENCES `ticketing` (
 	`ti_num`
 );
 
-ALTER TABLE `ticketiticketing_listng_list` ADD CONSTRAINT `FK_seat_TO_ticketing_list_1` FOREIGN KEY (
+ALTER TABLE `ticketing_list` ADD CONSTRAINT `FK_seat_TO_ticketing_list_1` FOREIGN KEY (
 	`tl_se_num`
 )
 REFERENCES `seat` (
 	`se_num`
 );
-
 
 ALTER TABLE `character` ADD CONSTRAINT `FK_person_TO_character_1` FOREIGN KEY (
 	`ch_ps_num`
@@ -266,3 +265,6 @@ ALTER TABLE `ticketing` ADD CONSTRAINT `FK_schedule_TO_ticketing_1` FOREIGN KEY 
 REFERENCES `schedule` (
 	`sd_num`
 );
+
+ALTER TABLE `cgv`.`schedule` 
+ADD COLUMN `sd_possible` INT NOT NULL AFTER `sd_sc_num`;
