@@ -31,7 +31,7 @@ INSERT INTO PROFESSOR VALUES("2024160001", "박교수", "컴퓨터공학", "3관
 # 신입교수 이교수 3관 201호 화학공학
 INSERT INTO PROFESSOR VALUES("2024135001", "이교수", "화학공학", "3관 201호");
 # 신입교수 김교수 3관 301호 기계공학 
-INSERT INTO PROFESSOR VALUES("2024123001", "기교수", "기계공학", "3관 301호");
+INSERT INTO PROFESSOR VALUES("2024123001", "김교수", "기계공학", "3관 301호");
 
 # 강의 등록
 # 컴퓨터개론, 전공 필수, 1관101호, 월1A,1B,2A,2B, 2, 2, 2024160001
