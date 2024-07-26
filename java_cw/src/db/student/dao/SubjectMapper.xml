@@ -5,10 +5,10 @@
 <mapper namespace="db.student.dao.SubjectDAO">
 	<select id="selectCountSubject" resultType="int">
 		select 
-			count(*)
-		from
-			subject
-		where
+			count(*) 
+		from 
+			subject 
+		where 
 			su_name = #{subject}
 	</select>
 	<insert id="insertSubject">
@@ -24,4 +24,12 @@
 		where
 			su_name = #{old}
 	</update>
+	<delete id="deleteSubject">
+		delete from subject
+		where
+			su_name = #{subject}
+	</delete>
+	<select id="selectSubjectNameList" resultType="SubjectVO">
+		select distinct su_name from subject
+	</select>
 </mapper>

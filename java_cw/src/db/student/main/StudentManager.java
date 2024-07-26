@@ -1,13 +1,10 @@
 package db.student.main;
 
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 import db.student.controller.StudentController;
 import db.student.controller.SubjectController;
-import db.student.model.vo.StudentVO;
-import db.student.model.vo.SubjectVO;
 import program.Program;
 
 public class StudentManager implements Program{
@@ -16,6 +13,7 @@ public class StudentManager implements Program{
 
 	private StudentController studentController = new StudentController(scan);
 	private SubjectController subjectController = new SubjectController(scan);
+	
 	@Override
 	public void printMenu() {
 		System.out.print(
@@ -25,6 +23,7 @@ public class StudentManager implements Program{
 				+ "3. 종료\n"
 				+ "메뉴 선택 : ");
 	}
+
 
 	@Override
 	public void run() {
@@ -168,7 +167,7 @@ public class StudentManager implements Program{
 		}
 		
 	}
-
+	
 	private void subject() {
 
 		int menu;
@@ -200,10 +199,10 @@ public class StudentManager implements Program{
 			subjectController.updateSubject();
 			break;
 		case 3:
-			//deleteSubject();
+			subjectController.deleteSubject();
 			break;
 		case 4:
-			//searchSubject();
+			subjectController.selectSubject();
 			break;
 		case 5:
 			prev();
@@ -211,7 +210,9 @@ public class StudentManager implements Program{
 		default:
 			defaultPrint();
 		}
+		
 	}
+
 /*
 	private void insertSubejctScore() {
 		//등록된 과목이 없으면 알림문구 출력 후 종료
@@ -369,90 +370,6 @@ public class StudentManager implements Program{
 		int semester = nextInt();
 		return new SubjectVO(name, grade, semester, 0, 0, 0);
 	}
-	
-
-	
-
-
-	
-
-
-	private void studnetSearch() {
-		//학년 반 번호를 입력 후 객체를 생성
-		StudentVO std = inputStudent();
-		
-		//생성된 객체와 일치하는 객체를 가져옴
-		//리스트에서 객체와 일치하는 번지를 가져옴
-		int index = list.indexOf(std);
-		//번지가 0보다 작으면 객체에 null을 저장
-		if(index < 0) {
-			std = null;
-		}
-		//아니면 객체에 번지에 있는 객체를 가져옴
-		else {
-			std = list.get(index);
-		}
-		//가져온 객체가 null이면 안내문구 출력 후 종료
-		if(std == null) {
-			System.out.println("일치하는 학생이 없습니다.");
-			return;
-		}
-		//null이 아니면 학생 정보를 출력
-		std.print();
-	}
-
-
-	
-
-
-	
-		
-	}
-
-
-	private void insertSubject() {
-		//과목명을 입력
-		System.out.print("과목 : ");
-		scan.nextLine();
-		String subject = scan.nextLine();
-		//과목 리스트에 등록된 과목인지 확인해서 등록되었으면 안내문구 출력 후 종료
-		if(subjectList.contains(subject)) {
-			System.out.println("이미 등록된 과목입니다.");
-			return;
-		}
-		//과목 리스트에 과목을 추가
-		subjectList.add(subject);
-		System.out.println("과목을 추가했습니다.");
-	}
-
-
-	
-
-
-	private void deleteSubject() {
-		//삭제할 과목명을 입력
-		System.out.print("과목 : ");
-		scan.nextLine();
-		String subject = scan.nextLine();
-		//리스트에서 과목을 삭제해서 성공하면 알림문구 출력 후 종료
-		if(subjectList.remove(subject)) {
-			System.out.println("과목을 삭제했습니다.");
-			return;
-		}
-		//실패하면 알림문구 출력
-		System.out.println("등록되지 않은 과목입니다.");
-	}
-
-
-	private void searchSubject() {
-		System.out.println("과목 목록");
-		for(String subject : subjectList) {
-			System.out.println(subject);
-		}
-		
-	}
-
-
 	
 	*/
 	private void prev() {

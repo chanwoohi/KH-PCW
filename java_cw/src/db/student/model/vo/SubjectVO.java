@@ -11,5 +11,6 @@ public class SubjectVO{
 	private int su_grade;
 	private int su_semester;
 	private int su_num;
+	private String su_name;
 
 }
