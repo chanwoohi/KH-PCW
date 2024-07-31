@@ -189,3 +189,12 @@ ADD CONSTRAINT `FK_post_TO_file_1`
   REFERENCES `community`.`post` (`po_num`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
+
+ALTER TABLE `community`.`comment` 
+DROP FOREIGN KEY `FK_post_TO_comment_1`;
+ALTER TABLE `community`.`comment` 
+ADD CONSTRAINT `FK_post_TO_comment_1`
+  FOREIGN KEY (`cm_po_num`)
+  REFERENCES `community`.`post` (`po_num`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
