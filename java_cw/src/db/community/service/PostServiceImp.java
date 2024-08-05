@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import db.community.dao.MemberDAO;
 import db.community.dao.PostDAO;
+import db.community.model.vo.CommentVO;
 import db.community.model.vo.CommunityVO;
 import db.community.model.vo.PostVO;
 import db.community.pagination.Criteria;
@@ -88,12 +87,11 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public boolean deleteCommunity(String name) {
-		//등록된 커뮤니티 수가 1이면 false를 리턴
+		//등록된 커뮤니티수가 1이면 false를 리턴 
 		List<CommunityVO> list = postDao.selectCommunityList();
-		if(list.size()==1) {
+		if(list.size() == 1) {
 			return false;
 		}
-		
 		
 		//다오에게 커뮤니티명을 주면서 삭제하라고 요청 후 삭제 여부를 반환
 		return postDao.deleteCommunity(name);
@@ -106,28 +104,26 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public boolean insertPost(PostVO post) {
-		//게시글VO null 체크 문제있으면 false를 리턴
-		if(post==null) {
+		//게시글VO null체크해서 문제 있으면 false를 리턴
+		if(post == null) {
 			return false;
 		}
-		//제목 null 체크, 빈문자열 체크 문제있으면 false를 리턴
+		//제목 null체크, 빈문자열 체크해서 문제 있으면 false를 리턴
 		if(!checkString(post.getPo_title())) {
 			return false;
 		}
-		//내용 null 체크, 빈문자열 체크 문제있으면 false를 리턴
+		//내용 null체크, 빈문자열 체크해서 문제 있으면 false를 리턴
 		if(!checkString(post.getPo_content())) {
 			return false;
 		}
-		//다오에게 게시글VO를 주면서 게시글을 등록하라고 요청한 후 성공 여부를 반환
+		//다오에게 게시글 VO를 주면서 게시글을 등록하라고 요청한 후 성공 여부를 반환
 		try {
-		return postDao.insertPost(post);
+			return postDao.insertPost(post);
 		}catch(Exception e) {
 			return false;
 		}
-		
 	}
-	
-	//문자열이 null 이거나 공백으로 된 문자열이면 false, 아니면 true
+	//문자열이 null이거나 공백으로 된 문자열이면 false, 아니면 true
 	private boolean checkString(String str) {
 		if(str == null || str.trim().length() == 0) {
 			return false;
@@ -150,12 +146,47 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public int selectPostListTotalCount(Criteria cri) {
-		if(cri==null) {
+		if(cri == null) {
 			return 0;
 		}
 		return postDao.selectPostListCount(cri);
 	}
 
+	@Override
+	public boolean deletePost(int po_num) {
+		return postDao.deletePost(po_num);
+	}
 
+	@Override
+	public boolean updatePost(PostVO post) {
+		if(post == null) {
+			return false;
+		}
+		if(!checkString(post.getPo_title()) || !checkString(post.getPo_content())) {
+			return false;
+		}
+		return postDao.updatePost(post);
+	}
 
+	@Override
+	public boolean insertCommnet(CommentVO comment) {
+		if(comment == null) {
+			return false;
+		}
+		if(!checkString(comment.getCm_content())) {
+			return false;
+		}
+		return postDao.insertComment(comment);
+	}
+
+	@Override
+	public List<CommentVO> getCommentList(int po_num) {
+		return postDao.selectCommentList(po_num);
+	}
+
+	@Override
+	public void updatePostView(int poNum) {
+		postDao.updatePostView(poNum);
+		
+	}
 }
