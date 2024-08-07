@@ -4,4 +4,5 @@
 .settings/
 
 java_cw/.gitignore
-/bin/
+
+MANIFEST.MF
