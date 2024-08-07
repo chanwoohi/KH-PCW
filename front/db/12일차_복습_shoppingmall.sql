@@ -3,7 +3,7 @@ SELECT * FROM PRODUCT;
 # 금액이 1만원 이상인 제품을 조회하는 쿼리 
 SELECT * FROM PRODUCT WHERE PR_PRICE >= 10000;
 # 제품명에 시원한이 들어간 제품을 조회하는 쿼리 
-SELECT * FROM PRODUCT WHERE PR_NAME LIKE CONCAT('%', '시원한', '%');
+SELECT * FROM PRODUCT WHERE PR_content LIKE CONCAT('%', '시원한', '%');
 # 카테고리가 옷인 제품을 조회하는 쿼리 
 SELECT * FROM PRODUCT WHERE PR_CA_NUM = 1;
 

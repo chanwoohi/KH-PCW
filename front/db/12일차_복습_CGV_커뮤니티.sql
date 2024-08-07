@@ -134,3 +134,9 @@ select * from post order by po_view desc;
 # 윈도우 함수를 where에 직접 사용할 수 없어서 검색 결과를 하나의 테이블처럼 처리해야 함
 select * from (select rank() over(order by po_view desc) as ranking, post.* from post) as po
 where ranking <= 3;
+
+select (row_number() over(order by po_view desc)) as rownum , po_title, po_view
+from post
+where rownum <= 3;
+
+
