@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.kh.app.model.vo.CommunityVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.pagination.Criteria;
 
 public interface PostDAO {
 
@@ -13,7 +14,9 @@ public interface PostDAO {
 
 	CommunityVO selectCommunityInfo(@Param("coNum")int coNum);
 
-	List<PostVO> selectPostList(@Param("coNum")int coNum);
+	List<PostVO> selectPostList(@Param("cri")Criteria cri);
+
+	int selectPostTotalCount(@Param("cri")Criteria cri);
 
 
 }
