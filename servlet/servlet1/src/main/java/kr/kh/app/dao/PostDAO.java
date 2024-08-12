@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.kh.app.model.vo.CommunityVO;
+import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.pagination.Criteria;
 
@@ -23,5 +24,9 @@ public interface PostDAO {
 	PostVO selectPost(@Param("po_num")int num);
 
 	void updatePostView(@Param("po_num")int num);
+
+	boolean updatePost(@Param("post")PostVO post);
+
+	boolean deletePost(@Param("po_num")int poNum);
 
 }
