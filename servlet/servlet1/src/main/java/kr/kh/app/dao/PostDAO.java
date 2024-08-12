@@ -12,11 +12,16 @@ public interface PostDAO {
 
 	List<CommunityVO> selectCommunityList();
 
-	CommunityVO selectCommunityInfo(@Param("coNum")int coNum);
+	CommunityVO selectCommunity(@Param("co_num")int coNum);
 
 	List<PostVO> selectPostList(@Param("cri")Criteria cri);
 
 	int selectPostTotalCount(@Param("cri")Criteria cri);
 
+	boolean insertPost(@Param("post")PostVO post);
+
+	PostVO selectPost(@Param("po_num")int num);
+
+	void updatePostView(@Param("po_num")int num);
 
 }

@@ -11,10 +11,16 @@ public interface PostService {
 
 	List<CommunityVO> getCommunityList();
 
-	CommunityVO getcommunityInfo(int coNum);
+	CommunityVO getCommunity(int coNum);
 
 	List<PostVO> getPostList(Criteria cri);
 
 	PageMaker getPageMaker(Criteria cri, int displayPageNum);
+
+	boolean insertPost(PostVO post);
+
+	PostVO getPostList(int num);
+
+	void updatePostView(int num);
 
 }
