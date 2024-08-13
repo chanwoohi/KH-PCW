@@ -5,6 +5,7 @@ import java.util.List;
 import kr.kh.app.model.vo.CommunityVO;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.RecommendVO;
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.pagination.PageMaker;
 
@@ -30,4 +31,9 @@ public interface PostService {
 
 	boolean deletePost(String po_numStr, MemberVO user);
 
+	int insertRecommend(RecommendVO recommend);
+
+	RecommendVO getRecommend(int num, MemberVO user);
+	
+	
 }

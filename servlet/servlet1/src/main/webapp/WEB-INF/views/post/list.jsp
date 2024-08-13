@@ -43,18 +43,23 @@
 			<c:forEach items="${list}" var="post" varStatus="vs">
 				<tr>
 					<!-- 전체 게시글 수에 맞춰서 게시글 번호를 배정 -->
-					<td>${pm.totalCount - vs.index - (pm.cri.pageStart) }</td>
+					<td>${pm.totalCount - vs.index - (pm.cri.pageStart)}</td>
 					<!-- <td>${post.po_num}</td> -->
 					<td>
-						<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title }</a>
+						<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title}</a>
 					</td>
 					<td>${post.po_me_id}</td>
 					<td><fmt:formatDate value="${post.po_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-					<td>0</td>
-					<td>${post.po_view }</td>
+					<td>
+					<c:choose>
+						<c:when test="${post.po_up eq 0 && post.po_down eq 0}">0</c:when>
+						<c:otherwise>${post.po_up}/${post.po_down}</c:otherwise>
+					</c:choose>
+					</td>
+					<td>${post.po_view}</td>
 				</tr>
 			</c:forEach>
-			<c:if test="${list.size() == 0 }">
+			<c:if test="${list.size() == 0}">
 				<tr>
 					<th colspan="6" class="text-center">등록된 게시글이 없습니다.</th>
 				</tr>
@@ -73,7 +78,7 @@
 				<a class="page-link" href="${url}">이전</a>
 			</li>
 		</c:if>
-		<c:forEach begin="${pm.startPage}" end="${pm.endPage }" var="i">
+		<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
 			<c:choose>
 				<c:when test="${pm.cri.page == i}">
 					<c:set var="active" value="active"/>

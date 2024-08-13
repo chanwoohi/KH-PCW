@@ -29,14 +29,20 @@
 			<label for="title">조회수:</label>
 			<input type="text" class="form-control" value="${post.po_view}">
 		</div>
+		<div class="text-center">
+			<a href="<c:url value="/post/recommend?state=1&num=${post.po_num}"/>" 
+				class="btn btn<c:if test="${re.re_state ne 1}">-outline</c:if>-primary">😀추천(${post.po_up})</a>
+			<a href="<c:url value="/post/recommend?state=-1&num=${post.po_num}"/>"
+				class="btn btn<c:if test="${re.re_state ne -1}">-outline</c:if>-danger">😥비추천(${post.po_down})</a>
+		</div>
 		<div class="form-group">
 			<label for="content">내용:</label>
 			<div class="form-control" style="min-height: 400px">${post.po_content}</div>
 		</div>
 		<a href="<c:url value="/post/list?co_num=${post.po_co_num}"/>" class="btn btn-outline-primary">목록</a>
-		<c:if test="${user ne null && post.po_me_id eq user.me_id}">
-		<a href="<c:url value="/post/update?po_num=${post.po_num}"/>" class="btn btn-outline-warning">수정</a>
-		<a href="<c:url value="/post/delete?po_num=${post.po_num}"/>" class="btn btn-outline-danger">삭제</a>
+			<c:if test="${user ne null && post.po_me_id eq user.me_id}">
+			<a href="<c:url value="/post/update?po_num=${post.po_num}"/>" class="btn btn-outline-warning">수정</a>
+			<a href="<c:url value="/post/delete?po_num=${post.po_num}"/>" class="btn btn-outline-danger">삭제</a>
 		</c:if>
 </div>
 </body>
