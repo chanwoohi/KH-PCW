@@ -1,4 +1,3 @@
-
 package kr.kh.app.service;
 
 import java.io.File;
@@ -13,8 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import kr.kh.app.dao.MemberDAO;
 import kr.kh.app.dao.PostDAO;
+import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.CommunityVO;
 import kr.kh.app.model.vo.FileVO;
 import kr.kh.app.model.vo.MemberVO;
@@ -29,7 +28,7 @@ public class PostServiceImp implements PostService {
 	private PostDAO postDao;
 	
 	private String uploadPath = "D:\\uploads";
-
+	
 	public PostServiceImp() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
 		InputStream inputStream;
@@ -83,8 +82,7 @@ public class PostServiceImp implements PostService {
 		if(post.getPo_content() == null || post.getPo_content().trim().length() == 0) {
 			return false;
 		}
-		boolean res = postDao.insertPost(post);
-		
+		boolean res =  postDao.insertPost(post);
 		//게시글이 등록되지 않으면 첨부파일을 추가하지 않음
 		if(!res) {
 			return false;
@@ -92,13 +90,12 @@ public class PostServiceImp implements PostService {
 		if(files == null || files.size() == 0) {
 			return true;
 		}
-		
+
 		//첨부파일을 추가
 		for(Part file : files) {
 			uploadFile(post.getPo_num(), file);
 		}
 		return true;
-		
 	}
 
 	private void uploadFile(int po_num, Part file) {
@@ -107,10 +104,10 @@ public class PostServiceImp implements PostService {
 		}
 		
 		String fileName = FileUploadUtils.getFileName(file);
-		if(fileName == null || fileName.trim().length() == 0){
+		if(fileName == null || fileName.trim().length() == 0) {
 			return;
 		}
-		//첨부파일을 업로드 하고 업로드 된 경로와 파일명을 가져옴
+		//첨부파일을 업로드 하고 업로드된 경로와 파일명을 가져옴
 		String uploadFileName = FileUploadUtils.upload(uploadPath, file);
 		FileVO fileVO = new FileVO(po_num, fileName, uploadFileName);
 		postDao.insertFile(fileVO);
@@ -138,18 +135,17 @@ public class PostServiceImp implements PostService {
 		if(post == null) {
 			return null;
 		}
-		//게시글의 작성자와 회원 아이디가 같으면 게시글을 반환
+		//게시글의 작성와 회원 아이디가 같으면 게시글을 반환
 		if(checkWriter(po_num, user)) {
 			return post;
 		}
-
 		//아니면 null을 반환
 		return null;
 	}
 
 	@Override
 	public boolean updatePost(PostVO post, MemberVO user) {
-		if(post == null || user == null ) {
+		if(post == null || user == null) {
 			return false;
 		}
 		if(!checkWriter(post.getPo_num(), user)) {
@@ -163,9 +159,8 @@ public class PostServiceImp implements PostService {
 		}
 		return postDao.updatePost(post);
 	}
-
 	//게시글 작성자인지 아닌지 확인하는 메소드
-	private boolean checkWriter(int po_num, MemberVO user){
+	private boolean checkWriter(int po_num, MemberVO user) {
 		//회원이 null이면 false을 반환
 		if(user == null) {
 			return false;
@@ -176,18 +171,18 @@ public class PostServiceImp implements PostService {
 		if(post == null) {
 			return false;
 		}
-		//게시글의 작성자와 회원 아이디가 같으면 true를 반환
+		//게시글의 작성와 회원 아이디가 같으면 true을 반환
 		if(post.getPo_me_id().equals(user.getMe_id())) {
 			return true;
 		}
-		//아니면 false을 반환
+		//아니면 null을 반환
 		return false;
 	}
 
 	@Override
 	public boolean deletePost(String po_num, MemberVO user) {
 		try {
-			int poNum = Integer.parseInt(po_num);	
+			int poNum = Integer.parseInt(po_num);
 			if(!checkWriter(poNum, user)) {
 				return false;
 			}
@@ -201,10 +196,10 @@ public class PostServiceImp implements PostService {
 			
 			//게시글 삭제
 			return postDao.deletePost(poNum);
-		} catch (Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
-		} 
-		return false;
+			return false;
+		}
 	}
 
 	private void deleteFile(FileVO file) {
@@ -226,26 +221,22 @@ public class PostServiceImp implements PostService {
 		}
 		//기존에 추천 내용을 확인
 		RecommendVO dbRecommend = postDao.selectRecommend(recommend);
-
+		
 		//없으면 추가 후 추천상태를 리턴
-		if(dbRecommend == null) {
-			postDao.insertRecommned(recommend);
+		if(dbRecommend == null){
+			postDao.insertRecommend(recommend);
 			return recommend.getRe_state();
 		}
-
-		//있으면 삭제
+		//있으면 삭제 
 		postDao.deleteRecommend(dbRecommend.getRe_num());
 		
 		//기존 상태와 새 상태가 같으면(취소)
 		if(dbRecommend.getRe_state() == recommend.getRe_state()) {
 			return 0;
 		}
-		
-		//기존 상태와 새 상태가 다르면(변경)
-		postDao.insertRecommned(recommend);
+		//기존상태와 새 상태가 다르면(변경)
+		postDao.insertRecommend(recommend);
 		return recommend.getRe_state();
-
-
 	}
 
 	@Override
@@ -253,13 +244,76 @@ public class PostServiceImp implements PostService {
 		if(user == null) {
 			return null;
 		}
-		
 		RecommendVO recommend = new RecommendVO(num, 0, user.getMe_id());
 		return postDao.selectRecommend(recommend);
 	}
 
 	@Override
+	public List<CommentVO> getCommentList(Criteria cri) {
+		if(cri == null) {
+			return null;
+		}
+		return postDao.selectCommentList(cri);
+	}
+
+	@Override
+	public PageMaker getCommentPageMaker(Criteria cri) {
+		if(cri == null) {
+			return null;
+		}
+		int totalCount = postDao.selectCommentTotalCount(cri);
+		return new PageMaker(totalCount, 2, cri);
+	}
+
+	@Override
+	public boolean insertComment(CommentVO comment) {
+		if(comment == null) {
+			return false;
+		}
+		if(comment.getCm_content()== null || comment.getCm_content().trim().length() == 0) {
+			return false;
+		}
+		return postDao.insertComment(comment);
+	}
+
+	@Override
+	public boolean deleteComment(int co_num, MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		//작성자가 맞는지 확인
+		CommentVO comment = postDao.selectComment(co_num);
+		if(comment == null) {
+			return false;
+		}
+		if(!comment.getCm_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		//맞으면 삭제 요청
+		return postDao.deleteComment(co_num);
+	}
+
+	@Override
+	public boolean updateComment(CommentVO comment, MemberVO user) {
+		if(user == null || comment == null) {
+			return false;
+		}
+		//작성자가 맞는지 확인
+		CommentVO dbComment = postDao.selectComment(comment.getCm_num());
+		if(dbComment == null) {
+			return false;
+		}
+		if(!dbComment.getCm_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		//맞으면 삭제 요청
+		return postDao.updateComment(comment);
+	}
+
+	@Override
 	public List<FileVO> getFileList(int num) {
+		
 		return postDao.selectFileList(num);
 	}
+
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.Part;
 
+import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.CommunityVO;
 import kr.kh.app.model.vo.FileVO;
 import kr.kh.app.model.vo.MemberVO;
@@ -33,13 +34,22 @@ public interface PostService {
 
 	boolean updatePost(PostVO post, MemberVO user);
 
-	boolean deletePost(String po_numStr, MemberVO user);
+	boolean deletePost(String po_num, MemberVO user);
 
 	int insertRecommend(RecommendVO recommend);
 
 	RecommendVO getRecommend(int num, MemberVO user);
 
+	List<CommentVO> getCommentList(Criteria cri);
+
+	PageMaker getCommentPageMaker(Criteria cri);
+
+	boolean insertComment(CommentVO comment);
+
+	boolean deleteComment(int co_num, MemberVO user);
+
+	boolean updateComment(CommentVO comment, MemberVO user);
+
 	List<FileVO> getFileList(int num);
-	
-	
+
 }
