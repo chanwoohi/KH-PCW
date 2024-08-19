@@ -18,6 +18,7 @@ import kr.kh.app.service.PostServiceImp;
 
 @WebServlet("/post/insert")
 //jsp form태그에 enctype을 설정하지 않고 @MultipartConfig을 추가하면 인식을 못함
+//jsp form태그에 enctype을 설정하고 @MultipartConfig을 추가하면 인식을 못함
 @MultipartConfig(
 	maxFileSize = 1024 * 1024 * 10, //10Mb
 	maxRequestSize = 1024 * 1024 * 10 * 3,
