@@ -16,8 +16,13 @@
 		<ul class="navbar-nav">
 			<li class="nav-item"><a class="nav-link"
 				href="<c:url value="/community"/>">커뮤니티</a></li>
+			<c:if test="${user ne null && user.me_authority eq 'ADMIN'}">
+				<li class="nav-item">
+					<a class="nav-link" href="<c:url value="/admin/community"/>">커뮤니티 관리 </a>
+				</li>
+			</c:if>
 			<c:choose>
-				<c:when test="${user == null }">
+				<c:when test="${user == null}">
 					<li class="nav-item"><a class="nav-link"
 						href="<c:url value="/signup"/>">회원가입</a></li>
 					<li class="nav-item"><a class="nav-link"

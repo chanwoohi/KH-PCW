@@ -43,9 +43,9 @@
 	<div class="text-center">
 		
 		<a  href="#" data-state="1"
-			class="btn-up btn btn<c:if test="${re.re_state ne 1}">-outline</c:if>-danger">추천(<span>${post.po_up }</span>)</a>
+			class="btn-up btn btn<c:if test="${re.re_state ne 1}">-outline</c:if>-primary">😙추천(<span>${post.po_up }</span>)</a>
 		<a  href="#" data-state="-1"
-			class="btn-down btn btn<c:if test="${re.re_state ne -1}">-outline</c:if>-danger">비추천(<span>${post.po_down }</span>)</a>
+			class="btn-down btn btn<c:if test="${re.re_state ne -1}">-outline</c:if>-danger">😪비추천(<span>${post.po_down }</span>)</a>
 	</div>
 	<div class="form-group">
 		<label for="content">내용:</label>
