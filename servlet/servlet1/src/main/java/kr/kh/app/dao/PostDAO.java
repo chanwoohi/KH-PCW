@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.kh.app.model.vo.CommunityVO;
+import kr.kh.app.model.vo.FileVO;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.model.vo.RecommendVO;
@@ -35,5 +36,9 @@ public interface PostDAO {
 	void deleteRecommend(@Param("re_num")int re_num);
 
 	void insertRecommned(@Param("re")RecommendVO recommend);
+
+	void insertFile(@Param("file")FileVO fileVO);
+
+	List<FileVO> selectFileList(@Param("po_num")int num);
 
 }
