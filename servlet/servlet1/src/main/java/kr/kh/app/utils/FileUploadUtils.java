@@ -17,7 +17,6 @@ public class FileUploadUtils {
 		 String contentDisposition = part.getHeader("content-disposition");
 		 String [] items = contentDisposition.split(";");
 		 for(String item : items) {
-			 System.out.println(item);
 			 //속성명="값";
 			 if(item.trim().startsWith("filename")) {
 				 return item.substring(item.indexOf("=")+2, item.length()-1);
