@@ -26,6 +26,7 @@
 				<label for="id">아이디:</label> <input type="text" class="form-control"
 					id="id" name="me_id">
 			</div>
+			<button type="button" class="btn btn-outline-success btn-dup col-12 mb-3">아이디 중복 검사</button>
 			<div class="form-group">
 				<label for="pw">비번:</label> <input type="password"
 					class="form-control" id="pw" name="me_pw">
@@ -86,6 +87,36 @@
 		var re = new RegExp(regex);
 		return this.optional(element) || re.test(value);
 	}, "정규표현식을 확인하세요.");
+	
+$('.btn-dup').click(function(){
+	//입력한 아이디를 가져옴
+	var id = $('#id').val();
+	//아이디 유효성 검사 확인
+	var regex = /^\w{6,13}$/;
+	if(!regex.test(id)){
+		alert('아이디는 영어, 숫자만 가능하며, 6~13자이어야 합니다.');
+		return;
+	}
+	//아이디를 서버에 보내서 사용 가능한지 확인
+	$.ajax({
+		async : false, //동기화를 시킴 => 확인이 끝날 때까지 다음 작업이 진행되지 않음
+		url : '<c:url value="/check/id"/>',
+		data : {
+			me_id : id
+		},
+		success : function(data){
+			if(data.result){
+				alert('사용 가능한 아이디입니다.')
+			} else {
+				alert('이미 사용 중인 아이디 입니다.')
+			}
+		},
+		error : function(xhr){
+			console.log(xhr);
+		}
+	});
+	
+});
 </script>
 </body>
 </html>
