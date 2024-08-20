@@ -28,6 +28,7 @@ public class AdminCommunityInsert extends HttpServlet {
 			request.setAttribute("msg", "커뮤니티 등록에 실패했습니다.");
 		}
 		request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);
+		
 	}
 
 }
