@@ -44,50 +44,56 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script type="text/javascript">
-	$('#form').validate({
-		rules : {
-			me_id : {
-				required : true,
-				regex : /^\w{6,13}$/
-			},
-			me_pw : {
-				required : true,
-				regex : /^[a-zA-Z0-9!@#$]{6,15}$/
-			},
-			me_pw2 : {
-				equalTo : pw
-			},
-			me_email : {
-				required : true,
-				email : true
-			}
+//아이디 사용 가능 여부를 알려주는 변수
+var flag = false;
+
+$('#form').validate({
+	rules : {
+		me_id : {
+			required : true,
+			regex : /^\w{6,13}$/
 		},
-		messages : {
-			me_id : {
-				required : '필수 항목입니다.',
-				regex : '아이디는 영어, 숫자만 가능하며, 6~13자이어야 합니다.'
-			},
-			me_pw : {
-				required : '필수 항목입니다.',
-				regex : '아이디는 영어, 숫자, 특수문자(!@#$)만 가능하며, 6~15자이어야 합니다.'
-			},
-			me_pw2 : {
-				equalTo : '비번과 일치하지 않습니다.'
-			},
-			me_email : {
-				required : '필수 항목입니다.',
-				email : '이메일 형식이 아닙니다'
-			}
+		me_pw : {
+			required : true,
+			regex : /^[a-zA-Z0-9!@#$]{6,15}$/
 		},
-		submitHandler : function() {
-			return true;
+		me_pw2 : {
+			equalTo : pw
+		},
+		me_email : {
+			required : true,
+			email : true
 		}
-	});
-	$.validator.addMethod('regex', function(value, element, regex) {
-		var re = new RegExp(regex);
-		return this.optional(element) || re.test(value);
-	}, "정규표현식을 확인하세요.");
-	
+	},
+	messages : {
+		me_id : {
+			required : '필수 항목입니다.',
+			regex : '아이디는 영어, 숫자만 가능하며, 6~13자이어야 합니다.'
+		},
+		me_pw : {
+			required : '필수 항목입니다.',
+			regex : '아이디는 영어, 숫자, 특수문자(!@#$)만 가능하며, 6~15자이어야 합니다.'
+		},
+		me_pw2 : {
+			equalTo : '비번과 일치하지 않습니다.'
+		},
+		me_email : {
+			required : '필수 항목입니다.',
+			email : '이메일 형식이 아닙니다'
+		}
+	},
+	submitHandler : function() {
+		if(!flag){
+			alert('아이디 중복 검사를 하세요.');
+		}
+		return checkId();
+	}
+});
+$.validator.addMethod('regex', function(value, element, regex) {
+	var re = new RegExp(regex);
+	return this.optional(element) || re.test(value);
+}, "정규표현식을 확인하세요.");
+
 $('.btn-dup').click(function(){
 	//입력한 아이디를 가져옴
 	var id = $('#id').val();
@@ -97,6 +103,24 @@ $('.btn-dup').click(function(){
 		alert('아이디는 영어, 숫자만 가능하며, 6~13자이어야 합니다.');
 		return;
 	}
+	if(checkId()){
+		alert('사용 가능한 아이디입니다.');
+		flag = true;
+	} else {
+		alert('이미 사용 중인 아이디 입니다.');
+	}
+});
+
+$('[name=me_id]').change(function(){
+	flag = false;
+});
+
+function checkId() {
+	var res = false;
+	//입력한 아이디를 가져옴
+	var id = $('#id').val();
+	//아이디 유효성 검사 확인
+	
 	//아이디를 서버에 보내서 사용 가능한지 확인
 	$.ajax({
 		async : false, //동기화를 시킴 => 확인이 끝날 때까지 다음 작업이 진행되지 않음
@@ -105,18 +129,14 @@ $('.btn-dup').click(function(){
 			me_id : id
 		},
 		success : function(data){
-			if(data.result){
-				alert('사용 가능한 아이디입니다.')
-			} else {
-				alert('이미 사용 중인 아이디 입니다.')
-			}
+			res = data.result;
 		},
 		error : function(xhr){
 			console.log(xhr);
 		}
 	});
-	
-});
+	return res;
+}
 </script>
 </body>
 </html>
