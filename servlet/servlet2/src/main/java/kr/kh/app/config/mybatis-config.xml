@@ -10,7 +10,6 @@
 	</settings>
 	
 	<typeAliases>
-		<!-- 팀프로젝트할 때 패키지명 수정 -->
 		<package name="kr.kh.app.model.vo"/>
 	</typeAliases>
 	
@@ -19,7 +18,6 @@
 			<transactionManager type="JDBC"/>
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-													<!-- 팀프로젝트할 때 데이터베이스 이름 수정 -->
 				<property name="url" value="jdbc:mysql://localhost:3306/community"/>
 				<property name="username" value="root"/>
 				<property name="password" value="root"/>
@@ -29,5 +27,6 @@
 	
 	<mappers>
 		<mapper resource="kr/kh/app/dao/MemberMapper.xml"/>
+		<mapper resource="kr/kh/app/dao/PostMapper.xml"/>
 	</mappers>
 </configuration>
