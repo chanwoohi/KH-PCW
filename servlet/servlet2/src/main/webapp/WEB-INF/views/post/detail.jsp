@@ -15,11 +15,11 @@
 	<h1>게시글 상세</h1>
 	<div class="form-group">
 		<label>제목 : </label>
-		<div class="form-control">${post.po_title }</div>
+		<div class="form-control">${post.po_title}</div>
 	</div>
 	<div class="form-group">
 		<label>작성자 : </label>
-		<div class="form-control">${post.po_me_id }</div>
+		<div class="form-control">${post.po_me_id}</div>
 	</div>
 	<div class="form-group">
 		<label>작성일 : </label>
@@ -29,11 +29,11 @@
 	</div>
 	<div class="form-group">
 		<label>조회수 : </label>
-		<div class="form-control">${post.po_view }</div>
+		<div class="form-control">${post.po_view}</div>
 	</div>
 	<div class="form-group">
 		<label>내용 : </label>
-		<div class="form-control" style="min-height: 400px; height: auto">${post.po_content }</div>
+		<div class="form-control" style="min-height: 400px; height: auto">${post.po_content}</div>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

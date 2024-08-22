@@ -11,6 +11,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div class="container" style="min-height: calc(100vh - 240px)">
+<h1>메인 페이지</h1>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 

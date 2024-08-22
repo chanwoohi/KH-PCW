@@ -114,6 +114,10 @@
     <input type="hidden" name="co_num" value="${pm.cri.co_num}">
   </div>
 	</form>
+	<div class="clearfix">
+		<a href="<c:url value="/post/insert?co_num=${co.co_num}"/>" 
+			class="btn btn-outline-danger float-right">게시글 등록</a>
+	</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
