@@ -10,7 +10,7 @@
 <body>
 <div class="jumbotron jumbotron-fluid bg-success mb-0">
   <div class="container">
-    <h1>.</h1>      
+    <p class="text-secondary">푸터</p>     
   </div>
 </div>
 </body>
