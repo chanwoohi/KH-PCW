@@ -55,4 +55,12 @@
 		insert into post(po_co_num, po_me_id, po_title, po_content)
 		values(#{post.po_co_num},#{post.po_me_id},#{post.po_title},#{post.po_content})
 	</insert>
+	<update id="updatePost">
+		update post 
+		set
+			po_title = #{post.po_title},
+			po_content = #{post.po_content}
+		where
+			po_num = #{post.po_num} 
+	</update>
 </mapper>
