@@ -24,8 +24,8 @@ public interface PostService {
 
 	boolean insertPost(PostVO post);
 
-	PostVO getPost(int po_num, MemberVO user);
-
 	boolean updatePost(PostVO post, MemberVO user);
+
+	int deletePost(String po_num, MemberVO user);
 
 }
