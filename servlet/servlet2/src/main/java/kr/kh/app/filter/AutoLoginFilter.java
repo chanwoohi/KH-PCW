@@ -53,7 +53,7 @@ public class AutoLoginFilter extends HttpFilter implements Filter {
 			//세션에 저장
 			session.setAttribute("user", user);
 		}
-		
+		chain.doFilter(request, response);
 		
 	}
 
