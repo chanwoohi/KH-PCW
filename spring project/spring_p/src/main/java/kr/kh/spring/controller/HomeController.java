@@ -1,5 +1,7 @@
 package kr.kh.spring.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,12 +43,29 @@ public class HomeController {
 	public String signupPost(Model model, MemberVO member) {
 		boolean res = memberService.signup(member);
 		if(res) {
-			model.addAttribute("msg","회원 가입을 했습니다.");
+			model.addAttribute("msg","회원 가입을 성공했습니다.");
 			model.addAttribute("url","/");
 		} else {
-			model.addAttribute("msg","회원 가입을 하지 못했습니다.");
+			model.addAttribute("msg","회원 가입을 실패했습니다.");
 			model.addAttribute("url","/signup");
 		}
+		return "/main/message";
+	}
+	@GetMapping("/login")
+	public String login() {
+		return "/member/login";
+	}
+	@PostMapping("/login")
+	public String loginPost(Model model, MemberVO member, HttpSession session) {
+		MemberVO user = memberService.login(member);
+		if(user != null) {
+			model.addAttribute("msg","로그인을 성공했습니다.");
+			model.addAttribute("url","/");
+		} else {
+			model.addAttribute("msg","로그인을 실패했습니다.");
+			model.addAttribute("url","/");
+		}
+		session.setAttribute("user", user);
 		return "/main/message";
 	}
 	
