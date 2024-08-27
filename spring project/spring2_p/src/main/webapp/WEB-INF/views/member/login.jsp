@@ -8,6 +8,17 @@
 <title>로그인</title>
 </head>
 <body>
-<h1>로그인</h1>
+<h1 class="mt-3">로그인</h1>
+<form action="<c:url value="/login"/>" method="post" id="form" class="mb-3">
+	<div class="form-group">
+		<label for="id">아이디:</label> <input type="text" class="form-control"
+			id="id" name="me_id">
+	</div>
+	<div class="form-group">
+		<label for="pw">비번:</label> <input type="password"
+			class="form-control" id="pw" name="me_pw">
+	</div>
+	<button type="submit" class="btn btn-outline-info col-12">로그인</button>
+</form>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package kr.kh.spring2.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,5 +47,19 @@ public class HomeController {
 	@GetMapping(value ="/login")
 	public String login(Model model) {
 		return "/member/login";
+	}
+	@PostMapping(value ="/login")
+	public String loginPost(Model model, MemberVO member, HttpSession session) {
+		MemberVO user = memberService.login(member);
+		session.setAttribute("user", user);
+		if(user != null) {
+			model.addAttribute("msg","로그인을 성공했습니다.");
+			model.addAttribute("url","/");
+		}else {
+			model.addAttribute("msg","로그인을 실패했습니다.");
+			model.addAttribute("url","/");
+		}
+		
+		return "/main/message";
 	}
 }

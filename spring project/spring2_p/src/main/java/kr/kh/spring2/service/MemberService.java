@@ -46,5 +46,20 @@ public class MemberService{
 		}
 		return false;
 	}
+
+	public MemberVO login(MemberVO member) {
+		if(member == null) {
+			return null;
+		}
+		MemberVO user = memberDao.selectMember(member);
+		if(user == null) {
+			return null;
+		}
+		
+		if(passwordEncoder.matches(member.getMe_pw(), user.getMe_pw())){
+			return user;
+		}
+		return null;
+	}
     
 }
