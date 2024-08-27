@@ -1,22 +1,17 @@
 package kr.kh.spring2.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.kh.spring2.model.vo.MemberVO;
 import kr.kh.spring2.service.MemberService;
 
-/**
- * Handles requests for the application home page.
- */
+
 @Controller
 public class HomeController {
 	
@@ -24,9 +19,31 @@ public class HomeController {
 	private MemberService memberService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Model model) {
 		
-		return "home";
+		return "/main/home";
 	}
 	
+	@GetMapping(value = "/signup")
+	public String signup(Model model) {
+		return "/member/signup";
+	}
+	@PostMapping(value ="/signup")
+	public String signupPost(Model model, MemberVO member) {
+		if(memberService.signup(member)) {
+			model.addAttribute("url", "/");
+			model.addAttribute("msg", "회원가입에 성공했습니다.");
+		}else {
+			model.addAttribute("url", "/signup");
+			model.addAttribute("msg", "회원가입에 실패했습니다.");
+		}
+		
+		return "/main/message";
+	}
+
+	
+	@GetMapping(value ="/login")
+	public String login(Model model) {
+		return "/member/login";
+	}
 }
