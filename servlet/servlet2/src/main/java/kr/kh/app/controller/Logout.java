@@ -29,7 +29,7 @@ public class Logout extends HttpServlet {
 		//세션에 있는 회원 정보를 지움
 		request.getSession().removeAttribute("user");
 		//알림
-		request.setAttribute("msg", "로그아웃을 했습니다.");
+		request.setAttribute("msg", "로그아웃에 성공했습니다.");
 		request.setAttribute("url", "/");
 		request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);
 	}
