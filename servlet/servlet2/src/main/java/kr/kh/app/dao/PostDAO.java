@@ -1,4 +1,4 @@
-package kr.teamproject2.app.dao;
+package kr.kh.app.dao;
 
 import java.util.List;
 
