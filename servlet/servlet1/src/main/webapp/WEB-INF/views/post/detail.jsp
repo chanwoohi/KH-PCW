@@ -53,10 +53,10 @@
 	</div>
 	<div class="form-group">
 		<label for="content">첨부파일:</label>
-		<c:if test="${fileList.size() == 0 }">
+		<c:if test="${fileList.size() == 0}">
 			<div class="form-control">첨부파일 없음</div>
 		</c:if>
-		<c:if test="${fileList.size() != 0 }">
+		<c:if test="${fileList.size() != 0}">
 			<c:forEach items="${fileList}" var="file">
 				<a class="form-control" 
 					href="<c:url value="/download?fileName=${file.fi_name}"/>"
