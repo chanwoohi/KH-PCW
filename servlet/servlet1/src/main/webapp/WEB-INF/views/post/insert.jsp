@@ -30,7 +30,8 @@
 			<input type="file" class="form-control" name="fileList">
 			<input type="file" class="form-control" name="fileList">
 		</div>
-		<button type="submit" class="btn btn-outline-success col-12">등록</button>
+		<button type="submit" class="btn btn-outline-warning col-12"
+			style="border: black solid 2px;">등록</button>
 		<input type="hidden" name="co_num" value="${co_num}">
 	</form>
 </div>
