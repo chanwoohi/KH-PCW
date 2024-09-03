@@ -1,5 +1,6 @@
 package kr.kh.spring.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,14 +20,13 @@ import kr.kh.spring.utils.UploadFileUtils;
 
 @Service
 public class PostService {
+
 	@Autowired
 	PostDAO postDao;
 	@Resource
 	String uploadPath;
-	
 
 	public List<CommunityVO> getCommunityList() {
-		
 		return postDao.selectCommunityList();
 	}
 
@@ -41,7 +41,7 @@ public class PostService {
 		if(cri == null) {
 			return null;
 		}
-		int totalCount = postDao.selectPostTotalCount(cri);
+		int totalCount =  postDao.selectPostTotalCount(cri);
 		return new PageMaker(3, cri, totalCount);
 	}
 
@@ -53,13 +53,15 @@ public class PostService {
 		try {
 			post.setPo_me_id(user.getMe_id());
 			res = postDao.insertPost(post);
-		} catch (Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
 		}
+		
 		if(!res) {
 			return false;
 		}
+
 		if(fileList == null || fileList.length == 0) {
 			return true;
 		}
@@ -71,20 +73,23 @@ public class PostService {
 	}
 
 	private void uploadFile(MultipartFile file, int po_num) {
+
 		if(file == null || file.getOriginalFilename().length() == 0) {
 			return;
 		}
+		
 		try {
-			//첨부파일을 서버에 업로드 후 경로가 포함된 파일명을 가져옴
 			String fi_ori_name = file.getOriginalFilename();
+			//첨부파일을 서버에 업로드 후 경로가 포함된 파일명을 가져옴
 			String fi_name = 
-			UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+			UploadFileUtils.uploadFile(uploadPath, fi_ori_name, file.getBytes());
 			//DB에 첨부파일 정보를 추가
 			FileVO fileVo = new FileVO(fi_name, fi_ori_name, po_num);
 			postDao.insertFile(fileVo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	public void updateView(Integer po_num) {
@@ -100,14 +105,14 @@ public class PostService {
 	}
 
 	public boolean updatePost(PostVO post, int[] fi_nums, MultipartFile[] fileList, MemberVO user) {
-		if(post == null) {
+		if(post == null ) {
 			return false;
 		}
 		if(user == null) {
 			return false;
 		}
 		
-		//작성자인지 확인
+		//작성자인지 확인 
 		if(!checkWriter(post.getPo_num(), user.getMe_id())) {
 			return false;
 		}
@@ -116,7 +121,7 @@ public class PostService {
 		
 		try {
 			res = postDao.updatePost(post);
-		} catch(Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -130,16 +135,13 @@ public class PostService {
 				deleteFile(fi_num);
 			}
 		}
-		
-		
 		//첨부파일 추가
 		if(fileList == null || fileList.length == 0) {
-			return false;
+			return true;
 		}
 		for(MultipartFile file : fileList) {
 			uploadFile(file, post.getPo_num());
 		}
-		
 		return true;
 	}
 
@@ -148,14 +150,13 @@ public class PostService {
 		if(post == null) {
 			return false;
 		}
-		return false;
+		return post.getPo_me_id().equals(me_id);
 	}
 
 	private void deleteFile(int fi_num) {
 		//첨부파일 정보를 가져옴
 		FileVO file = postDao.selectFile(fi_num);
 		deleteFile(file);
-		
 	}
 	private void deleteFile(FileVO file) {
 		if(file == null) {
@@ -167,7 +168,7 @@ public class PostService {
 		postDao.deleteFile(file.getFi_num());
 	}
 
-	public boolean deletePost(MemberVO user, int po_num) {
+	public boolean deletePost(int po_num, MemberVO user) {
 		if(user == null) {
 			return false;
 		}
@@ -182,5 +183,37 @@ public class PostService {
 		//DB에서 첨부파일 삭제(구현할 필요가 없음. 왜? 게시글 삭제 시 DB에서 해당 첨부파일을 삭제하기로 했기 때문)
 		
 		return postDao.deletePost(po_num);
+	}
+
+	public boolean insertCommunity(String name) {
+		if(name == null || name.trim().length() == 0) {
+			return false;
+		}
+		try {
+			return postDao.insertCommunity(name);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean deleteCommunity(int co_num) {
+		List<CommunityVO> list = postDao.selectCommunityList();
+		if(list.size() == 1) {
+			return false;
+		}
+		return postDao.deleteCommunity(co_num);
+	}
+
+	public boolean updateCommunity(CommunityVO community) {
+		if(community == null) {
+			return false;
+		}
+		try {
+			return postDao.updateCommunity(community);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

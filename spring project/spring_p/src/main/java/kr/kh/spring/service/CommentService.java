@@ -13,6 +13,7 @@ import kr.kh.spring.pagination.PageMaker;
 
 @Service
 public class CommentService {
+
 	@Autowired
 	CommentDAO commentDao;
 
@@ -20,7 +21,6 @@ public class CommentService {
 		if(comment == null || user == null) {
 			return false;
 		}
-		
 		comment.setCm_me_id(user.getMe_id());
 		return commentDao.insertComment(comment);
 	}
@@ -29,7 +29,7 @@ public class CommentService {
 		if(cri == null) {
 			return null;
 		}
-		return commentDao.selectCommentList(cri);
+		return commentDao.seelctCommentList(cri);
 	}
 
 	public PageMaker getCommentPageMaker(Criteria cri) {
@@ -38,5 +38,40 @@ public class CommentService {
 		}
 		int totalCount = commentDao.selectCommentTotalCount(cri);
 		return new PageMaker(5, cri, totalCount);
+	}
+
+	public boolean deleteComment(CommentVO comment, MemberVO user) {
+		if(user == null || comment == null) {
+			return false;
+		}
+		return commentDao.deleteComment(comment.getCm_num());
+	}
+
+	public boolean deleteComment(int cm_num, MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		if(!isWriter(cm_num, user.getMe_id())) {
+			return false;
+		}
+		return commentDao.deleteComment(cm_num);
+	}
+
+	public boolean updateComment(CommentVO comment, MemberVO user) {
+		if(user == null || comment == null) {
+			return false;
+		}
+		if(!isWriter(comment.getCm_num(), user.getMe_id())) {
+			return false;
+		}
+		return commentDao.updateComment(comment);
+	}
+	public boolean isWriter(int cm_num, String me_id) {
+		CommentVO comment = commentDao.selectComment(cm_num);
+		if(comment == null ) {
+			return false;
+		}
+		return comment.getCm_me_id().equals(me_id);
+
 	}
 }
