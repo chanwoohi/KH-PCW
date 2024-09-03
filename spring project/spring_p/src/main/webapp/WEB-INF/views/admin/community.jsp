@@ -55,7 +55,7 @@ $('.btn-co-update').click(function(){
 		<form action="<c:url value="/admin/community/update"/>" method="post" id="form2">
 			<div class="input-group mb-3">
 				<input type="text" class="form-control" placeholder="수정할 커뮤니티명을 입력하세요." 
-					   name="name" required
+					   name="co_name" required
 					   value="\${co_name}">
 				<input type="hidden" name="co_num" value="\${co_num}"/>
 				<div class="input-group-append">

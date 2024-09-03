@@ -55,8 +55,8 @@ public class AdminController {
 	
 	@RequestMapping("/community/update")
 	public String communityUpdate(Model model, CommunityVO community) {
+		System.out.println(community);
 		boolean res = postService.updateCommunity(community);
-		
 		if(res) {
 			model.addAttribute("msg", "커뮤니티를 수정했습니다.");
 		}else {
