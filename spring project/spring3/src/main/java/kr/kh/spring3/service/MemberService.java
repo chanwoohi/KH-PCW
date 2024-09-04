@@ -7,6 +7,7 @@ import kr.kh.spring3.dao.MemberDAO;
 
 @Service
 public class MemberService {
+	
 	@Autowired
 	MemberDAO memberDao;
 	
