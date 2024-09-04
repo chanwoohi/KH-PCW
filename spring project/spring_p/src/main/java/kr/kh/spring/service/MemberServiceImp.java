@@ -150,7 +150,9 @@ public class MemberServiceImp implements MemberService{
 		if(user == null || member == null){
 			return false;
 		}
+		
 		member.setMe_id(user.getMe_id());
+		
 		if(member.getMe_pw().length() == 0) {
 			//로그인한 회원 비번을 이용
 			member.setMe_pw(user.getMe_pw());
