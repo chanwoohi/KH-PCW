@@ -1,26 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
-	<style type="text/css">
-	.error{
-		color : red;
-	}
-	.error.id-ok{
-		color : green
-	}
+<script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
+<script src="<c:url value="/signup"/>"></script>
+<style type="text/css">
+.error {
+	color: red;
+}
+
+.error.id-ok {
+	color: green
+}
 </style>
 </head>
 <body>
-<h1>회원 가입</h1>
+	<h1>회원 가입</h1>
 	<form action="<c:url value="/signup"/>" method="post" id="form">
 		<div class="form-group">
 			<label for="id">아이디:</label> <input type="text" class="form-control"
