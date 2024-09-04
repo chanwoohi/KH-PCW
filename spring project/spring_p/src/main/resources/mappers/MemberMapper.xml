@@ -23,9 +23,11 @@
 		select * from member where me_cookie = #{me_cookie} and me_limit > now()
 	</select>
 	<update id="updateMember">
-		update member
+		update 
+			member
 		set
-			me_pw = #{user.me_pw}
+			me_pw = #{user.me_pw},
+			me_email = #{user.me_email}
 		where
 			me_id = #{user.me_id}
 	</update>
