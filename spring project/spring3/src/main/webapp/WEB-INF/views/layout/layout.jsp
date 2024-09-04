@@ -5,13 +5,21 @@
  
 <html>
 <head>
-<title>스프링</title>
+	<title>
+		<c:choose>
+			<c:when test="${title ne null}">${title}</c:when>
+			<c:otherwise>스프링</c:otherwise>
+		</c:choose>
+	</title>
+	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+	<script src="<c:url value="/resources/js/bootstrap.bundle.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
 </head>
 <body>
     <tiles:insertAttribute name="header"/>
     <div class="container">        
         <tiles:insertAttribute name="body" />
     </div>                                                  
-    <tiles:insertAttribute name="footer" />
 </body>
 </html>
