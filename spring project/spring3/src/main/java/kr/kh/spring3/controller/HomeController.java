@@ -76,4 +76,15 @@ public class HomeController {
 		
 		return "/main/message";
 	}
+	
+	@GetMapping("/member/logout")
+	public String guestLogout(Model model, HttpSession session) {
+		MessageDTO message;
+		
+		session.removeAttribute("user");
+		message = new MessageDTO("/", "로그아웃 성공!");
+		
+		model.addAttribute("message", message);
+		return "/main/message";
+	}
 }
