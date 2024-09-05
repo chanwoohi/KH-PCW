@@ -12,8 +12,8 @@
 		</c:choose>
 	</title>
 	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
-	<script src="<c:url value="/resources/js/bootstrap.bundle.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/bootstrap.bundle.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
 </head>
 <body>

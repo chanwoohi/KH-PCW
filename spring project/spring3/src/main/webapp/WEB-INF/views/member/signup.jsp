@@ -18,7 +18,7 @@
 </head>
 <body>
 <h1>회원가입</h1>
-<form action="<c:url value="/signup"/>" id="form" method="post">
+<form action="<c:url value="/guest/signup"/>" id="form" method="post">
 	<div class="form-group">
 		<label for="me_id">아이디</label>
 		<input type="text" class="form-control" id="id" name="me_id">

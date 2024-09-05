@@ -33,13 +33,8 @@ public class MemberService {
 		//암호화된 비번으로 회원 정보를 수정
 		member.setMe_pw(encPw);
 		
+		return memberDao.insertMember(member);
 		
-		try {
-			return memberDao.insertMember(member);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
 		
 	}
 	private boolean regexCheckMember(MemberVO member) {
@@ -52,4 +47,25 @@ public class MemberService {
 		
 		return true;
 	}
+	
+	
+	public MemberVO login(MemberVO member) {
+		if(member ==  null) {
+			return null;
+		}
+		//회원 정보를 가져옴(아이디를 이용)
+		MemberVO user = memberDao.selectMember(member.getMe_id());
+		
+		//아이디 일치하지 않음
+		if(user == null) {
+			return null;
+		}
+		
+		//비번 확인
+		if(passwordEncoder.matches(member.getMe_pw(), user.getMe_pw())) {
+			return user;
+		}
+		return null;
+	}
+
 }
