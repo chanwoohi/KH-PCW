@@ -13,11 +13,11 @@
 		<c:forEach items="${list}" var="co">
 			<c:choose>
 				<c:when test="${co.co_num eq pm.cri.co_num }">
-					<a href="<c:url value="/post/list?co_num=${co.co_num }"/>"
+					<a href="<c:url value="/post/list?co_num=${co.co_num}"/>"
 						class="btn btn-info">${co.co_name }</a>
 				</c:when>
 				<c:otherwise>
-					<a href="<c:url value="/post/list?co_num=${co.co_num }"/>"
+					<a href="<c:url value="/post/list?co_num=${co.co_num}"/>"
 						class="btn btn-outline-info">${co.co_name }</a>
 				</c:otherwise>
 			</c:choose>
