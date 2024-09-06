@@ -18,7 +18,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-<div class="container" style="min-height: calc(100vh - 2400px)">
+<div class="container">
 	<h1>로그인</h1>
 	<form action="<c:url value="/login"/>" method="post" id="form">
 		<div class="form-group">

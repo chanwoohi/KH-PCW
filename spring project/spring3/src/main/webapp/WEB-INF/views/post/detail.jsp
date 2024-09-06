@@ -11,10 +11,10 @@
 	<div>
 		<div class="form-group">
 			<label for="po_title">제목</label>
-			<input type="text" class="form-control" id="po_title" name="po_title" readonly value=${post.po_title}>
+			<input type="text" class="form-control" id="po_title" name="po_title" readonly value=${post.po_title}/>
 		</div>
 		<div class="form-group">
-			<label">작성자</label>
+			<label>작성자</label>
 			<input type="text" class="form-control" readonly value=${post.po_me_id}>
 		</div>
 		<div class="form-group">
@@ -35,6 +35,10 @@
 				<a href="<c:url value="/download${file.fi_name}"/>" class="form-control" download="${file.fi_ori_name}">${file.fi_ori_name}</a>
 			</c:forEach>
 		</div>
+		<c:if test="${post.po_me_id == user.me_id }">
+			<a href="<c:url value="/post/update/${post.po_num}"/>" class="btn btn-outline-dark">수정</a>
+			<a href="<c:url value="/post/delete/${post.po_co_num}/${post.po_num}"/>" class="btn btn-outline-danger">삭제</a>
+		</c:if>																													
 	</div>
 </body>
 </html>
