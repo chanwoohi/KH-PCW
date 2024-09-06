@@ -60,15 +60,14 @@ public class PostService {
 	}
 
 	public boolean insertPost(PostVO post, MemberVO user, MultipartFile[] fileList) {
-		if(post == null /*|| user == null*/) {
+		if(post == null || user == null) {
 			return false;
 		}
 		if(post.getPo_title().length()==0) {
 			return false;
 		}
 		
-		//post.setPo_me_id(user.getMe_id());
-		post.setPo_me_id("qwe1234");
+		post.setPo_me_id(user.getMe_id());
 		
 		boolean res = postDao.insertPost(post); 
 		

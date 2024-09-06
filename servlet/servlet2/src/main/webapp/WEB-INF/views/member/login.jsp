@@ -6,9 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="/WEB-INF/views/common/head.jsp"/>
+<title>로그인</title>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
-<title>로그인</title>
 <style type="text/css">
 .error{
 	color:red;
@@ -18,7 +18,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-<div class="container" style="min-height: calc(100vh - 240px)">
+<div class="container" style="min-height: calc(100vh - 2400px)">
 	<h1>로그인</h1>
 	<form action="<c:url value="/login"/>" method="post" id="form">
 		<div class="form-group">

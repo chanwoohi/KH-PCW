@@ -53,6 +53,6 @@
 	</insert>
 	<insert id="insertFile">
 		insert into file(fi_po_num, fi_name, fi_ori_name)
-		values(#{fi_po_num},#{fi_name},#{fi_ori_name})
+		values(#{fi_po_num}, #{fi_name}, #{fi_ori_name})
 	</insert>
 </mapper>
