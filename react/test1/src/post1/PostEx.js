@@ -13,7 +13,7 @@ import PostList from "./PostList";
 
 function PostEx() {
 
-	let [flag, setFlag] = useState(false);
+
 
 	let [list, setList] = useState([{
 		title : '공지',
@@ -21,12 +21,7 @@ function PostEx() {
 		content : '공지사항',
 		view : 0
 	}]);
-	function titleClick(index){
-		let tmp = [...list];
-		list[index].view++;
-		setList(tmp);
-		setFlag(true);
-	}
+
 
 	return(
 		<div>
