@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.kh.spring3.model.dto.MessageDTO;
 import kr.kh.spring3.model.vo.CommunityVO;
@@ -99,5 +100,14 @@ public class HomeController {
 		model.addAttribute("message", message);
 		return "/main/message";
 	}
-	
+	@ResponseBody
+	@GetMapping("/test")
+	public String test() {
+		return "Hello";
+	}
+	@ResponseBody
+	@GetMapping("/test2")
+	public List<CommunityVO> test2() {
+		return postService.getCommunityList();
+	}
 }
