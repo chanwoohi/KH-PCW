@@ -11,7 +11,6 @@ function Nav(){
 					<Link to={"/post/list/0"}>커뮤니티</Link>
 				</li>
 			</ul>
-			
 		</nav>
 	);
 }
