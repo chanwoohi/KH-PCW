@@ -36,13 +36,12 @@ public class ReactController {
 		//게시글 목록을 가져옴(전체)
 		List<PostVO> list = postService.getPostList(cri);
 		
-		//페이지메이커 
+		//페이지메이커
 		PageMaker pm = postService.getPageMaker(cri);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		map.put("pm", pm);
 		return map;
-		
 	}
 }
