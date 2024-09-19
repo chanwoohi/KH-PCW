@@ -10,7 +10,6 @@ function Button(props) {
 */
 
 function Button({type, className, text, click}) {
-	
 	//	요소의 class를 지정하려면 class 키워드 대신 className을 이용
 	return(
 		<button type={type} className={className} onClick={click}>{text}</button>
