@@ -41,4 +41,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	            .excludePathPatterns("/post/list", "/post/detail"); // 제외할 경로
     }
     
+    @Bean
+	public PasswordEncoder passwordEncoder() {
+	    return new BCryptPasswordEncoder();  // BCryptPasswordEncoder 빈 등록
+	}
 }
