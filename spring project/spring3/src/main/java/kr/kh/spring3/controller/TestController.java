@@ -21,4 +21,5 @@ public class TestController {
 		System.out.println(member);
 		return memberService.signup(member);
 	}
+	
 }
