@@ -21,7 +21,7 @@ function App2() {
 			writer : 'abc123'
 		}
 	])
-	let [title, setTitle] = useState('');
+	const [title, setTitle] = useState('');
 	let [writer, setWriter] = useState('');
 	let [content, setContent] = useState('');
 	const click = ()=>{
