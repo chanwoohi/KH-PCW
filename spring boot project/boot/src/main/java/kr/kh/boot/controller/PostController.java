@@ -44,6 +44,7 @@ public class PostController {
 		model.addAttribute("post", post);
 		return "post/detail";
 	}
+	
 	@GetMapping("/post/insert/{co_num}")
 	public String postInsert(@PathVariable int co_num, 
 			@ModelAttribute("post") PostVO post) {
